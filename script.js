@@ -1,4 +1,4 @@
-/* Debangshi Portfolio Interactive Script */
+/* Debangshi Roy Portfolio Interactive Script (Sharath SP Luxury Style) */
 
 // Top-level Global Resume Modal Functions
 function openResumeModal() {
@@ -21,92 +21,93 @@ function closeResumeModal() {
   }
 }
 
+function scrollToSection(id) {
+  const target = document.getElementById(id);
+  if (target) {
+    const navHeight = 70;
+    const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - navHeight;
+    window.scrollTo({
+      top: targetPosition,
+      behavior: 'smooth'
+    });
+  }
+}
+
+function closeMobileNav() {
+  const mobileNav = document.getElementById('mobileNav');
+  if (mobileNav) {
+    mobileNav.classList.remove('open');
+  }
+}
+
 window.openResumeModal = openResumeModal;
 window.closeResumeModal = closeResumeModal;
+window.scrollToSection = scrollToSection;
+window.closeMobileNav = closeMobileNav;
 
 document.addEventListener('DOMContentLoaded', () => {
-  // Attach click handlers to any .resume-btn element as fallback
-  document.querySelectorAll('.resume-btn').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      e.preventDefault();
-      openResumeModal();
-    });
-  });
+  // Dual Custom Cursor Tracking
+  const cursor = document.getElementById('cursor');
+  const cursorRing = document.getElementById('cursorRing');
 
-  // Attach click handler to modal overlay & close button
+  if (cursor && cursorRing) {
+    window.addEventListener('mousemove', (e) => {
+      const mouseX = e.clientX;
+      const mouseY = e.clientY;
+
+      cursor.style.left = `${mouseX}px`;
+      cursor.style.top = `${mouseY}px`;
+
+      cursorRing.style.left = `${mouseX}px`;
+      cursorRing.style.top = `${mouseY}px`;
+    });
+
+    // Expand cursor ring on interactive elements
+    const hoverables = document.querySelectorAll('a, button, .project-card, .tool-item, .filter-btn, .experience-item');
+    hoverables.forEach(el => {
+      el.addEventListener('mouseenter', () => {
+        cursorRing.style.width = '54px';
+        cursorRing.style.height = '54px';
+        cursorRing.style.borderColor = '#c9a96e';
+        cursorRing.style.backgroundColor = 'rgba(201, 169, 110, 0.08)';
+      });
+      el.addEventListener('mouseleave', () => {
+        cursorRing.style.width = '36px';
+        cursorRing.style.height = '36px';
+        cursorRing.style.borderColor = 'rgba(201, 169, 110, 0.4)';
+        cursorRing.style.backgroundColor = 'transparent';
+      });
+    });
+  }
+
+  // Mobile Menu Toggle
+  const menuToggle = document.getElementById('menuToggle');
+  const mobileNav = document.getElementById('mobileNav');
+
+  if (menuToggle && mobileNav) {
+    menuToggle.addEventListener('click', () => {
+      mobileNav.classList.toggle('open');
+    });
+  }
+
+  // Modal Listeners
   const modalOverlay = document.getElementById('modal-overlay');
   const closeCvModal = document.getElementById('closeCvModal');
+
   if (modalOverlay) modalOverlay.addEventListener('click', closeResumeModal);
   if (closeCvModal) closeCvModal.addEventListener('click', closeResumeModal);
 
-  // Keyboard Escape Listener for Modal
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
       closeResumeModal();
     }
   });
 
-  // Navbar scroll background effect
-  const navbar = document.querySelector('.navbar');
-  const navLinks = document.querySelectorAll('.nav-link');
-  const sections = document.querySelectorAll('section[id]');
-  const menuToggle = document.querySelector('.menu-toggle');
-  const navMenu = document.querySelector('.nav-links');
-
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 50) {
-      navbar.classList.add('scrolled');
-    } else {
-      navbar.classList.remove('scrolled');
-    }
-
-    // ScrollSpy active link highlighting
-    let currentSectionId = '';
-    sections.forEach(section => {
-      const sectionTop = section.offsetTop - 120;
-      const sectionHeight = section.offsetHeight;
-      if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
-        currentSectionId = section.getAttribute('id');
-      }
-    });
-
-    navLinks.forEach(link => {
-      link.classList.remove('active');
-      if (link.getAttribute('href') === `#${currentSectionId}`) {
-        link.classList.add('active');
-      }
-    });
-  });
-
-  // Mobile Menu Toggle
-  if (menuToggle && navMenu) {
-    menuToggle.addEventListener('click', () => {
-      navMenu.classList.toggle('open');
-      const icon = menuToggle.querySelector('i');
-      if (icon) {
-        if (navMenu.classList.contains('open')) {
-          icon.className = 'fas fa-times';
-        } else {
-          icon.className = 'fas fa-bars';
-        }
-      }
-    });
-
-    // Close menu when clicking a link
-    navLinks.forEach(link => {
-      link.addEventListener('click', () => {
-        navMenu.classList.remove('open');
-        const icon = menuToggle.querySelector('i');
-        if (icon) icon.className = 'fas fa-bars';
-      });
-    });
-  }
-
-  // Tech Stack Category Filter Interaction
+  // Tech Stack Category Filtering
   const filterBtns = document.querySelectorAll('.filter-btn');
-  const techItems = document.querySelectorAll('.tech-item');
+  const toolItems = document.querySelectorAll('.tool-item');
 
-  if (filterBtns.length > 0 && techItems.length > 0) {
+  if (filterBtns.length > 0 && toolItems.length > 0) {
     filterBtns.forEach(btn => {
       btn.addEventListener('click', () => {
         filterBtns.forEach(b => b.classList.remove('active'));
@@ -114,15 +115,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const filter = btn.getAttribute('data-filter');
 
-        techItems.forEach(item => {
-          item.classList.remove('fade-in');
+        toolItems.forEach(item => {
           const category = item.getAttribute('data-category');
-
           if (filter === 'all' || category === filter) {
             item.classList.remove('hidden');
-            setTimeout(() => {
-              item.classList.add('fade-in');
-            }, 30);
           } else {
             item.classList.add('hidden');
           }
@@ -130,91 +126,4 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
   }
-
-  // Interactive Contact Form Handling
-  const contactForm = document.getElementById('contactForm');
-  if (contactForm) {
-    contactForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      
-      const submitBtn = contactForm.querySelector('.form-submit');
-      const originalText = submitBtn.innerHTML;
-      
-      submitBtn.disabled = true;
-      submitBtn.innerHTML = '<span>Sending Message...</span>';
-
-      setTimeout(() => {
-        showToast('Thank you! Your message has been sent successfully. I will get back to you soon.');
-        contactForm.reset();
-        submitBtn.disabled = false;
-        submitBtn.textContent = originalText;
-      }, 1200);
-    });
-  }
-
-  // Custom Toast Notification Function
-  function showToast(message) {
-    let toastContainer = document.querySelector('.toast-container');
-    if (!toastContainer) {
-      toastContainer = document.createElement('div');
-      toastContainer.className = 'toast-container';
-      document.body.appendChild(toastContainer);
-    }
-
-    const toast = document.createElement('div');
-    toast.className = 'toast';
-    toast.innerHTML = `
-      <i class="fas fa-check-circle" style="color: var(--accent-emerald); font-size: 1.1rem;"></i>
-      <span>${message}</span>
-    `;
-
-    toastContainer.appendChild(toast);
-
-    setTimeout(() => {
-      toast.classList.add('show');
-    }, 50);
-
-    setTimeout(() => {
-      toast.classList.remove('show');
-      setTimeout(() => {
-        toast.remove();
-      }, 400);
-    }, 4000);
-  }
-
-  // Custom Cursor Tracking Effect
-  const customCursor = document.getElementById('customCursor');
-  if (customCursor) {
-    window.addEventListener('mousemove', (e) => {
-      customCursor.style.transform = `translate(${e.clientX - 6}px, ${e.clientY - 6}px)`;
-    });
-
-    // Expand cursor on interactive elements
-    document.querySelectorAll('a, button, .featured-card, .secondary-card, .process-card, .capability-card, .hero-leaf-box').forEach(el => {
-      el.addEventListener('mouseenter', () => {
-        customCursor.style.width = '24px';
-        customCursor.style.height = '24px';
-        customCursor.style.margin = '-6px 0 0 -6px';
-      });
-      el.addEventListener('mouseleave', () => {
-        customCursor.style.width = '12px';
-        customCursor.style.height = '12px';
-        customCursor.style.margin = '0';
-      });
-    });
-  }
-
-  // Smooth Scroll Back to Top Button
-  const backToTopBtn = document.getElementById('backToTop');
-  if (backToTopBtn) {
-    backToTopBtn.addEventListener('click', () => {
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
-    });
-  }
 });
-
-
-

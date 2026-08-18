@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Debangshi — Frontend Developer & Data Analyst</title>
+  <meta name="description" content="Portfolio of Debangshi, a Frontend Developer & Data Analyst specializing in React, JavaScript, SQL, Data Visualization, and Data Analytics.">
+  
+  <!-- Google Fonts & FontAwesome -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <link rel="stylesheet" href="style.css?v=2.0">
+  <script src="script.js?v=2.0"></script>
+</head>
+<body>
+
+  <!-- Navigation Header -->
+  <header class="navbar">
+    <div class="container nav-container">
+      <a href="#" class="logo">Debangshi</a>
+
+      <div class="nav-center-wrapper">
+        <ul class="nav-links">
+          <li><a href="#about" class="nav-link">About</a></li>
+          <li><a href="#tech" class="nav-link">Tech Stack</a></li>
+          <li><a href="#projects" class="nav-link">Projects</a></li>
+          <li><a href="#contact" class="nav-link">Contact</a></li>
+        </ul>
+      </div>
+
+      <button class="status-pill resume-btn" id="resume-btn" onclick="openResumeModal()" title="View & Download Resume">
+        <span class="status-dot"></span>
+        <span class="status-text">RESUME</span>
+        <i class="fas fa-file-invoice"></i>
+      </button>
+
+      <button class="menu-toggle" aria-label="Toggle Navigation">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+      <div class="container hero-grid">
+        <div class="hero-content">
+          <div class="status-badge">
+            <span class="status-dot"></span>
+            <span>Available for new opportunities</span>
+          </div>
+
+          <h1 class="hero-title">Hi, I'm Debangshi</h1>
+          <h2 class="hero-subtitle">Frontend Developer & Data Analyst</h2>
+          <p class="hero-description">
+            I build modern, responsive web applications and analyze data to uncover actionable insights. Specializing in React, JavaScript, SQL, Python, and Data Visualization to deliver clean UIs and data-driven solutions.
+          </p>
+
+          <div class="hero-actions">
+            <a href="#projects" class="btn-primary">
+              <span>View Projects</span>
+              <i class="fas fa-arrow-right"></i>
+            </a>
+            <button class="btn-secondary resume-btn" id="hero-resume-btn" onclick="openResumeModal()">
+              <span>View Resume</span>
+              <i class="fas fa-file-invoice"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="hero-visual">
+          <div class="hero-card-container">
+            <div class="portrait-wrapper">
+              <img src="assets/hero-portrait.jpg" alt="Debangshi - Frontend Developer & Data Analyst" class="hero-img">
+            </div>
+
+            <!-- Floating Badges -->
+            <div class="hero-badge-tag badge-top">
+              <i class="fas fa-code" style="color: #38bdf8;"></i>
+              <span>Frontend Developer</span>
+            </div>
+
+            <div class="hero-badge-tag badge-bottom">
+              <i class="fas fa-chart-line" style="color: #a855f7;"></i>
+              <span>Data Analyst</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section" id="about">
+      <div class="container">
+        <div class="about-grid">
+          <div class="about-text">
+            <span class="section-tag">About Me</span>
+            <h2 class="section-title">Crafting modern web interfaces & data-driven insights.</h2>
+            <p>
+              I'm a Frontend Developer and Data Analyst who loves building performant web applications and analyzing complex datasets. I bridge the gap between user interfaces and data intelligence—turning designs into clean code and raw data into actionable insights.
+            </p>
+            <p>
+              Whether it's building interactive user dashboards, querying databases, crafting data visualizations, or optimizing web performance, I prioritize clean architecture, accuracy, and user-first principles.
+            </p>
+
+            <div class="about-highlights">
+              <div class="highlight-item">
+                <i class="fas fa-check-circle"></i>
+                <span>Responsive UI Development</span>
+              </div>
+              <div class="highlight-item">
+                <i class="fas fa-check-circle"></i>
+                <span>Data Analytics & SQL</span>
+              </div>
+              <div class="highlight-item">
+                <i class="fas fa-check-circle"></i>
+                <span>Data Visualization</span>
+              </div>
+              <div class="highlight-item">
+                <i class="fas fa-check-circle"></i>
+                <span>Clean Architecture</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="experience-cards">
+            <div class="exp-card">
+              <div class="exp-role">Frontend Web Developer</div>
+              <div class="exp-meta">Modern Web Applications & UI Engineering</div>
+              <div class="exp-desc">Building responsive web interfaces, single-page applications, and interactive user components with React, JavaScript, and HTML/CSS.</div>
+            </div>
+
+            <div class="exp-card">
+              <div class="exp-role">Data Analyst</div>
+              <div class="exp-meta">Data Processing, Insights & Visualizations</div>
+              <div class="exp-desc">Querying databases with SQL, processing datasets with Python & Pandas, and creating interactive analytics dashboards.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tech Stack Section -->
+    <section class="section" id="tech">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Toolkit</span>
+          <h2 class="section-title">Technologies & Tools</h2>
+          <p class="section-desc">The core technologies I use for web development and data analytics.</p>
+        </div>
+
+        <!-- Tech Category Filters -->
+        <div class="tech-filter-bar">
+          <button class="filter-btn active" data-filter="all">All Tools</button>
+          <button class="filter-btn" data-filter="frontend">Frontend Dev</button>
+          <button class="filter-btn" data-filter="data">Data Analytics</button>
+          <button class="filter-btn" data-filter="tools">Developer Tools</button>
+        </div>
+
+        <!-- Interactive Animated Tech Grid -->
+        <div class="tech-grid">
+          <!-- Frontend items -->
+          <div class="tech-item" data-category="frontend">
+            <div class="tech-icon-wrapper">
+              <i class="fab fa-react tech-icon spin-on-hover" style="color: #61dafb;"></i>
+            </div>
+            <span class="tech-name">React</span>
+            <span class="tech-badge">Frontend</span>
+          </div>
+
+          <div class="tech-item" data-category="frontend">
+            <div class="tech-icon-wrapper">
+              <i class="fab fa-js-square tech-icon bounce-on-hover" style="color: #f7df1e;"></i>
+            </div>
+            <span class="tech-name">JavaScript</span>
+            <span class="tech-badge">Frontend</span>
+          </div>
+
+          <div class="tech-item" data-category="frontend">
+            <div class="tech-icon-wrapper">
+              <i class="fab fa-html5 tech-icon scale-on-hover" style="color: #e34f26;"></i>
+            </div>
+            <span class="tech-name">HTML5</span>
+            <span class="tech-badge">Frontend</span>
+          </div>
+
+          <div class="tech-item" data-category="frontend">
+            <div class="tech-icon-wrapper">
+              <i class="fab fa-css3-alt tech-icon scale-on-hover" style="color: #1572b6;"></i>
+            </div>
+            <span class="tech-name">CSS3</span>
+            <span class="tech-badge">Frontend</span>
+          </div>
+
+          <!-- Data Analytics items -->
+          <div class="tech-item" data-category="data">
+            <div class="tech-icon-wrapper">
+              <i class="fas fa-database tech-icon pulse-on-hover" style="color: #38bdf8;"></i>
+            </div>
+            <span class="tech-name">SQL</span>
+            <span class="tech-badge">Database</span>
+          </div>
+
+          <div class="tech-item" data-category="data">
+            <div class="tech-icon-wrapper">
+              <i class="fab fa-python tech-icon float-on-hover" style="color: #3776ab;"></i>
+            </div>
+            <span class="tech-name">Python / Pandas</span>
+            <span class="tech-badge">Analytics</span>
+          </div>
+
+          <div class="tech-item" data-category="data">
+            <div class="tech-icon-wrapper">
+              <i class="fas fa-chart-pie tech-icon spin-slow" style="color: #a855f7;"></i>
+            </div>
+            <span class="tech-name">Data Visualization</span>
+            <span class="tech-badge">Analytics</span>
+          </div>
+
+          <div class="tech-item" data-category="data">
+            <div class="tech-icon-wrapper">
+              <i class="fas fa-chart-line tech-icon bounce-on-hover" style="color: #ec4899;"></i>
+            </div>
+            <span class="tech-name">PowerBI / Excel</span>
+            <span class="tech-badge">Reporting</span>
+          </div>
+
+          <div class="tech-item" data-category="data">
+            <div class="tech-icon-wrapper">
+              <i class="fas fa-calculator tech-icon scale-on-hover" style="color: #f2c811;"></i>
+            </div>
+            <span class="tech-name">DAX</span>
+            <span class="tech-badge">Analytics</span>
+          </div>
+
+          <div class="tech-item" data-category="data">
+            <div class="tech-icon-wrapper">
+              <i class="fas fa-chart-column tech-icon scale-on-hover" style="color: #e97627;"></i>
+            </div>
+            <span class="tech-name">Tableau</span>
+            <span class="tech-badge">BI & Reporting</span>
+          </div>
+
+          <div class="tech-item" data-category="data">
+            <div class="tech-icon-wrapper">
+              <i class="fas fa-snowflake tech-icon spin-slow" style="color: #29b5e8;"></i>
+            </div>
+            <span class="tech-name">Snowflake</span>
+            <span class="tech-badge">Data Warehouse</span>
+          </div>
+
+          <!-- Tools / Cloud / AI items -->
+          <div class="tech-item" data-category="tools">
+            <div class="tech-icon-wrapper">
+              <i class="fab fa-aws tech-icon scale-on-hover" style="color: #ff9900;"></i>
+            </div>
+            <span class="tech-name">AWS</span>
+            <span class="tech-badge">Cloud</span>
+          </div>
+
+          <div class="tech-item" data-category="tools">
+            <div class="tech-icon-wrapper">
+              <i class="fas fa-brain tech-icon pulse-on-hover" style="color: #a855f7;"></i>
+            </div>
+            <span class="tech-name">Prompt Engineering</span>
+            <span class="tech-badge">Generative AI</span>
+          </div>
+
+          <div class="tech-item" data-category="tools">
+            <div class="tech-icon-wrapper">
+              <i class="fab fa-git-alt tech-icon scale-on-hover" style="color: #f05032;"></i>
+            </div>
+            <span class="tech-name">Git & GitHub</span>
+            <span class="tech-badge">Version Control</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="section" id="projects">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Work</span>
+          <h2 class="section-title">Featured Projects</h2>
+          <p class="section-desc">A selection of recent projects in web development and data analytics.</p>
+        </div>
+
+        <div class="projects-grid">
+          <!-- Project 1 -->
+          <div class="project-card">
+            <div class="project-img-wrapper">
+              <img src="assets/project-dashboard.jpg" alt="Data Analytics & Insights Dashboard" class="project-img">
+            </div>
+            <div class="project-body">
+              <div class="project-tags">
+                <span class="tag">Data Analytics</span>
+                <span class="tag">SQL</span>
+                <span class="tag">Snowflake</span>
+                <span class="tag">Tableau</span>
+              </div>
+              <h3 class="project-title">Data Analytics & Insights Dashboard</h3>
+              <p class="project-desc">A real-time analytics web dashboard built for querying databases, calculating metrics, and rendering interactive visual charts.</p>
+              <div class="project-footer">
+                <a href="#" class="project-link">
+                  <span>Live Demo</span>
+                  <i class="fas fa-external-link-alt"></i>
+                </a>
+                <a href="https://github.com/debangshi" target="_blank" class="project-link">
+                  <span>GitHub</span>
+                  <i class="fab fa-github"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project 2 -->
+          <div class="project-card">
+            <div class="project-img-wrapper">
+              <img src="assets/project-design-system.jpg" alt="Nexus UI Component Studio" class="project-img">
+            </div>
+            <div class="project-body">
+              <div class="project-tags">
+                <span class="tag">React</span>
+                <span class="tag">Frontend</span>
+                <span class="tag">JavaScript</span>
+              </div>
+              <h3 class="project-title">Nexus Component Studio</h3>
+              <p class="project-desc">An interactive component studio enabling development teams to build consistent, accessible, and responsive user interfaces.</p>
+              <div class="project-footer">
+                <a href="#" class="project-link">
+                  <span>Live Demo</span>
+                  <i class="fas fa-external-link-alt"></i>
+                </a>
+                <a href="https://github.com/debangshi" target="_blank" class="project-link">
+                  <span>GitHub</span>
+                  <i class="fab fa-github"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section" id="contact">
+      <div class="container">
+        <div class="contact-grid">
+          <div class="contact-info-card">
+            <span class="section-tag">Contact</span>
+            <h2 class="section-title">Let's connect.</h2>
+            <p class="section-desc">I'm open for Frontend Development and Data Analyst opportunities, freelance work, and technical collaborations. Feel free to reach out!</p>
+
+            <div class="contact-methods">
+              <a href="mailto:roydebangshi5@gmail.com" class="method-item">
+                <div class="method-icon">
+                  <i class="fas fa-envelope"></i>
+                </div>
+                <div>
+                  <div class="method-label">Email</div>
+                  <div class="method-val">roydebangshi5@gmail.com</div>
+                </div>
+              </a>
+
+              <a href="tel:+917384563401" class="method-item">
+                <div class="method-icon">
+                  <i class="fas fa-phone"></i>
+                </div>
+                <div>
+                  <div class="method-label">Phone</div>
+                  <div class="method-val">+91 7384563401</div>
+                </div>
+              </a>
+
+              <a href="https://github.com/debangshiroy26" target="_blank" class="method-item">
+                <div class="method-icon">
+                  <i class="fab fa-github"></i>
+                </div>
+                <div>
+                  <div class="method-label">GitHub</div>
+                  <div class="method-val">github.com/debangshiroy26</div>
+                </div>
+              </a>
+
+              <a href="https://www.linkedin.com/in/debangshiroy26" target="_blank" class="method-item">
+                <div class="method-icon">
+                  <i class="fab fa-linkedin-in"></i>
+                </div>
+                <div>
+                  <div class="method-label">LinkedIn</div>
+                  <div class="method-val">linkedin.com/in/debangshiroy26</div>
+                </div>
+              </a>
+            </div>
+          </div>
+
+          <form class="contact-form" id="contactForm">
+            <div class="form-group">
+              <label for="name" class="form-label">Your Name</label>
+              <input type="text" id="name" class="form-input" placeholder="e.g. Alex Morgan" required>
+            </div>
+
+            <div class="form-group">
+              <label for="email" class="form-label">Your Email</label>
+              <input type="email" id="email" class="form-input" placeholder="alex@example.com" required>
+            </div>
+
+            <div class="form-group message-group">
+              <label for="message" class="form-label">Your Message</label>
+              <textarea id="message" class="form-textarea" placeholder="Tell me about your project..." required></textarea>
+            </div>
+
+            <button type="submit" class="form-submit">
+              <span>Send Message</span>
+              <i class="fas fa-paper-plane"></i>
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div>© 2026 Debangshi Roy. All rights reserved.</div>
+      <div style="display: flex; gap: 16px;">
+        <a href="https://github.com/debangshiroy26" target="_blank" style="color: var(--text-muted); text-decoration: none;"><i class="fab fa-github"></i></a>
+        <a href="https://www.linkedin.com/in/debangshiroy26" target="_blank" style="color: var(--text-muted); text-decoration: none;"><i class="fab fa-linkedin"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Interactive Cyber / Neo-Brutalist Resume Modal -->
+  <div class="resume-modal" id="resume-modal" aria-hidden="true">
+    <div class="modal-overlay" id="modal-overlay" onclick="closeResumeModal()"></div>
+    <div class="modal-container cyber-modal">
+      <div class="modal-top-bar">
+        <span class="modal-badge-tag">CURRICULUM VITAE // OFFICIAL RESUME</span>
+        <button class="modal-close-btn" id="closeCvModal" onclick="closeResumeModal()" aria-label="Close Modal">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+
+      <div class="modal-body cyber-modal-body">
+        <header class="cyber-cv-header">
+          <h1 class="cyber-cv-name">DEBANGSHI ROY</h1>
+          <div class="cyber-cv-role">FRONTEND DEVELOPER <span class="divider">|</span> DATA ANALYST</div>
+
+          <div class="cyber-contact-grid">
+            <span class="contact-pill"><i class="fas fa-map-marker-alt" style="color: #ec4899;"></i> Kolkata, West Bengal</span>
+            <span class="contact-pill"><i class="fas fa-phone-alt" style="color: #38bdf8;"></i> +91 7384563401</span>
+            <a href="mailto:roydebangshi5@gmail.com" class="contact-pill"><i class="fas fa-envelope" style="color: #a855f7;"></i> roydebangshi5@gmail.com</a>
+            <a href="https://www.linkedin.com/in/debangshiroy26" target="_blank" class="contact-pill link-pill green"><i class="fab fa-linkedin"></i> LinkedIn</a>
+            <a href="https://github.com/debangshiroy26" target="_blank" class="contact-pill link-pill pink"><i class="fab fa-github"></i> GitHub</a>
+          </div>
+        </header>
+
+        <div class="modal-download-banner">
+          <a href="assets/Debangshi-Resume.pdf" download="Debangshi-Roy-CV.pdf" class="btn-cyber-download">
+            <i class="fas fa-file-download"></i>
+            <span>DOWNLOAD RESUME PDF</span>
+          </a>
+          <button class="btn-cyber-print" onclick="window.print()">
+            <i class="fas fa-print"></i>
+            <span>PRINT CV</span>
+          </button>
+        </div>
+
+        <section class="cyber-section">
+          <h2 class="cyber-section-title">PROFESSIONAL SUMMARY</h2>
+          <p class="cyber-text">
+            Frontend Developer and aspiring Data Analyst skilled in building responsive, user-friendly web applications using HTML, CSS, and JavaScript, with a strong foundation in Python, SQL, and data visualization. Passionate about creating intuitive user experiences, writing clean code, analyzing data, and transforming insights into meaningful solutions. Currently exploring modern JavaScript frameworks, data analytics tools, and scalable application architectures.
+          </p>
+        </section>
+
+        <section class="cyber-section">
+          <h2 class="cyber-section-title">TECHNICAL & DATA SKILLS</h2>
+          <div class="skills-tag-cloud">
+            <span class="skill-tag red">C</span>
+            <span class="skill-tag blue">Python</span>
+            <span class="skill-tag orange">HTML5</span>
+            <span class="skill-tag blue">CSS3</span>
+            <span class="skill-tag yellow">JavaScript</span>
+            <span class="skill-tag green">SQL</span>
+            <span class="skill-tag purple">React</span>
+            <span class="skill-tag teal">Tableau</span>
+            <span class="skill-tag green">Pandas</span>
+            <span class="skill-tag blue">NumPy</span>
+            <span class="skill-tag yellow">Microsoft Excel</span>
+            <span class="skill-tag pink">Responsive Design</span>
+            <span class="skill-tag purple">DOM Manipulation</span>
+            <span class="skill-tag green">Data Cleaning</span>
+            <span class="skill-tag teal">EDA Analytics</span>
+            <span class="skill-tag red">GitHub</span>
+            <span class="skill-tag blue">VS Code</span>
+            <span class="skill-tag purple">Vercel</span>
+            <span class="skill-tag yellow">Cursor</span>
+          </div>
+        </section>
+
+        <section class="cyber-section">
+          <h2 class="cyber-section-title">PROFESSIONAL EXPERIENCE</h2>
+
+          <div class="experience-block">
+            <div class="exp-header">
+              <h3 class="exp-title">PR Lead – Technical Club, Meghnad Saha Institute of Technology</h3>
+              <span class="exp-date">June 2025 – Aug 2026</span>
+            </div>
+            <ul class="cyber-bullet-list">
+              <li>Led a creative team handling graphic design, branding, event promotion, photography, and visual communication.</li>
+              <li>Guided team members in creating posters, social media creatives, and event branding.</li>
+              <li>Collaborated with the college PR team on media campaigns and event promotions.</li>
+            </ul>
+          </div>
+
+          <div class="experience-block">
+            <div class="exp-header">
+              <h3 class="exp-title">Web Developer Intern — InnoByte Services (Remote)</h3>
+              <span class="exp-date">Oct 2025 – Nov 2025</span>
+            </div>
+            <ul class="cyber-bullet-list">
+              <li>Redesigned King Sukh Guest House website using HTML, CSS (Tailwind/Bootstrap), and JavaScript, boosting responsiveness by 95%.</li>
+              <li>Streamlined code and optimized assets, cutting load time by 40% and improving Core Web Vitals.</li>
+              <li>Delivered a full redesign within 25 days through agile collaboration on GitHub and Vercel.</li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="cyber-section">
+          <h2 class="cyber-section-title">RELEVANT PROJECTS</h2>
+
+          <div class="project-block">
+            <div class="exp-header">
+              <h3 class="exp-title">Personal Portfolio Website <span class="tech-pill">HTML, CSS, JavaScript</span></h3>
+              <a href="https://github.com/debangshiroy26" target="_blank" class="live-link">Live - GitHub <i class="fas fa-external-link-alt"></i></a>
+            </div>
+            <ul class="cyber-bullet-list">
+              <li>Developed a responsive personal portfolio website to showcase technical skills, projects, achievements, and professional experience in a structured layout.</li>
+              <li>Implemented smooth navigation, interactive elements, responsive layouts, and performance optimizations.</li>
+            </ul>
+          </div>
+
+          <div class="project-block">
+            <div class="exp-header">
+              <h3 class="exp-title">Stopwatch Application <span class="tech-pill">HTML, CSS, JavaScript</span></h3>
+              <a href="https://github.com/debangshiroy26" target="_blank" class="live-link">Live - GitHub <i class="fas fa-external-link-alt"></i></a>
+            </div>
+            <ul class="cyber-bullet-list">
+              <li>Developed an interactive stopwatch application with start, pause, reset, and lap-time tracking functionality using JavaScript-based real-time controls.</li>
+              <li>Designed a clean and responsive user interface with accurate time tracking and deployed on Vercel.</li>
+            </ul>
+          </div>
+
+          <div class="project-block">
+            <div class="exp-header">
+              <h3 class="exp-title">Guess the Number Game <span class="tech-pill">HTML, CSS, JavaScript</span></h3>
+              <a href="https://github.com/debangshiroy26" target="_blank" class="live-link">Live - GitHub <i class="fas fa-external-link-alt"></i></a>
+            </div>
+            <ul class="cyber-bullet-list">
+              <li>Built an interactive number-guessing game where users receive dynamic hints and feedback while identifying randomly generated numbers.</li>
+              <li>Implemented score tracking, input validation, game logic, and animations.</li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="cyber-section">
+          <h2 class="cyber-section-title">CERTIFICATIONS</h2>
+          <div class="experience-block">
+            <h3 class="exp-title">Deloitte Australia — Data Analytics Virtual Experience Program (Forage)</h3>
+            <ul class="cyber-bullet-list">
+              <li>Completed Tableau dashboards, data classification, and insights simulation.</li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="cyber-section">
+          <h2 class="cyber-section-title">ACHIEVEMENTS</h2>
+          <ul class="cyber-bullet-list">
+            <li>Core Member, Megatronix — organized Paridhi, one of Eastern India’s largest tech fests.</li>
+            <li>Participated in Smart India Hackathon (SIH)</li>
+            <li>Competed in a SAP – organized college hackathon</li>
+          </ul>
+        </section>
+
+        <section class="cyber-section">
+          <h2 class="cyber-section-title">EDUCATION</h2>
+          <div class="exp-header">
+            <h3 class="exp-title">B.Tech in Computer Science & Engineering (Data Science) – 7.40 GPA</h3>
+            <span class="exp-date">Sept 2022 – Aug 2026</span>
+          </div>
+          <p class="cyber-subtext">Meghnad Saha Institute of Technology, Kolkata</p>
+        </section>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

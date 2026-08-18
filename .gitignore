@@ -1,0 +1,3 @@
+server.py
+*.log
+.DS_Store

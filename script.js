@@ -164,7 +164,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const toast = document.createElement('div');
     toast.className = 'toast';
     toast.innerHTML = `
-      <i class="fas fa-check-circle" style="color: #c084fc; font-size: 1.2rem;"></i>
+      <i class="fas fa-check-circle" style="color: var(--accent-emerald); font-size: 1.1rem;"></i>
       <span>${message}</span>
     `;
 
@@ -180,6 +180,28 @@ document.addEventListener('DOMContentLoaded', () => {
         toast.remove();
       }, 400);
     }, 4000);
+  }
+
+  // Custom Cursor Tracking Effect
+  const customCursor = document.getElementById('customCursor');
+  if (customCursor) {
+    window.addEventListener('mousemove', (e) => {
+      customCursor.style.transform = `translate(${e.clientX - 6}px, ${e.clientY - 6}px)`;
+    });
+
+    // Expand cursor on interactive elements
+    document.querySelectorAll('a, button, .featured-card, .secondary-card, .process-card, .capability-card, .hero-leaf-box').forEach(el => {
+      el.addEventListener('mouseenter', () => {
+        customCursor.style.width = '24px';
+        customCursor.style.height = '24px';
+        customCursor.style.margin = '-6px 0 0 -6px';
+      });
+      el.addEventListener('mouseleave', () => {
+        customCursor.style.width = '12px';
+        customCursor.style.height = '12px';
+        customCursor.style.margin = '0';
+      });
+    });
   }
 
   // Smooth Scroll Back to Top Button

@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   themeToggleBtn.addEventListener('click', () => {
     body.classList.toggle('light-mode');
+    body.classList.toggle('dark-mode');
     const icon = themeToggleBtn.querySelector('i');
     
     if (body.classList.contains('light-mode')) {

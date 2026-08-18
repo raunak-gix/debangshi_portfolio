@@ -1,4 +1,17 @@
-/* Debangshi Roy Portfolio Interactive Script (Sharath SP Luxury Style) */
+/* Debangshi Roy Portfolio Interactive Script (Sharath SP Luxury SPA Style) */
+
+// Single Page Application (SPA) Page Switcher
+function goTo(pageId) {
+  const pages = document.querySelectorAll('.page');
+  pages.forEach(page => page.classList.remove('active'));
+
+  const targetPage = document.getElementById('page-' + pageId);
+  if (targetPage) {
+    targetPage.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    document.body.setAttribute('data-page', pageId);
+  }
+}
 
 // Top-level Global Resume Modal Functions
 function openResumeModal() {
@@ -40,6 +53,7 @@ function closeMobileNav() {
   }
 }
 
+window.goTo = goTo;
 window.openResumeModal = openResumeModal;
 window.closeResumeModal = closeResumeModal;
 window.scrollToSection = scrollToSection;
@@ -63,7 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Expand cursor ring on interactive elements
-    const hoverables = document.querySelectorAll('a, button, .project-card, .tool-item, .filter-btn, .experience-item');
+    const hoverables = document.querySelectorAll('a, button, .project-card, .tool-item, .filter-btn, .experience-item, .impact-card, .next-project');
     hoverables.forEach(el => {
       el.addEventListener('mouseenter', () => {
         cursorRing.style.width = '54px';
@@ -77,6 +91,55 @@ document.addEventListener('DOMContentLoaded', () => {
         cursorRing.style.borderColor = 'rgba(201, 169, 110, 0.4)';
         cursorRing.style.backgroundColor = 'transparent';
       });
+    });
+  }
+
+  // Interactive Before/After Image Comparison Slider
+  const compareSlider = document.getElementById('compareSlider1');
+  const compareAfter = document.getElementById('compareAfter1');
+  const compareHandle = document.getElementById('compareHandle1');
+
+  if (compareSlider && compareAfter && compareHandle) {
+    let isDragging = false;
+
+    const setSliderPosition = (x) => {
+      const rect = compareSlider.getBoundingClientRect();
+      let offsetX = x - rect.left;
+      if (offsetX < 0) offsetX = 0;
+      if (offsetX > rect.width) offsetX = rect.width;
+
+      const percentage = (offsetX / rect.width) * 100;
+      compareAfter.style.width = `${percentage}%`;
+      compareHandle.style.left = `${percentage}%`;
+    };
+
+    compareSlider.addEventListener('mousedown', (e) => {
+      isDragging = true;
+      setSliderPosition(e.clientX);
+    });
+
+    window.addEventListener('mousemove', (e) => {
+      if (!isDragging) return;
+      setSliderPosition(e.clientX);
+    });
+
+    window.addEventListener('mouseup', () => {
+      isDragging = false;
+    });
+
+    // Touch support for mobile
+    compareSlider.addEventListener('touchstart', (e) => {
+      isDragging = true;
+      if (e.touches[0]) setSliderPosition(e.touches[0].clientX);
+    });
+
+    window.addEventListener('touchmove', (e) => {
+      if (!isDragging) return;
+      if (e.touches[0]) setSliderPosition(e.touches[0].clientX);
+    });
+
+    window.addEventListener('touchend', () => {
+      isDragging = false;
     });
   }
 

@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Debangshi Roy — Frontend Developer & Data Analyst</title>
-  <meta name="description" content="Portfolio of Debangshi Roy — Frontend Developer & Data Analyst crafting high-performance web applications and data-driven insights.">
+  <meta name="description" content="Portfolio of Debangshi Roy — Frontend Developer & Data Analyst crafting high-performance web applications and data-driven insights. Case studies: Data Analytics Dashboard, Smart Commerce Portal, AI Sentiment Engine, Financial Reconciliation.">
   <meta name="author" content="Debangshi Roy">
 
   <!-- Google Fonts & FontAwesome -->
@@ -13,7 +13,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   
-  <link rel="stylesheet" href="style.css?v=4.0">
+  <link rel="stylesheet" href="style.css?v=5.0">
 </head>
 <body data-page="home">
 
@@ -21,14 +21,14 @@
   <div class="cursor" id="cursor"></div>
   <div class="cursor-ring" id="cursorRing"></div>
 
-  <!-- Navigation Header -->
+  <!-- Floating Navigation Header -->
   <nav id="nav">
-    <button class="nav-logo nav-btn" onclick="window.scrollTo({top:0, behavior:'smooth'})">DR</button>
+    <button class="nav-logo nav-btn" onclick="goTo('home')">DR</button>
     <div class="nav-links">
-      <button class="nav-btn" onclick="scrollToSection('work')">Work</button>
-      <button class="nav-btn" onclick="scrollToSection('capabilities')">Toolkit</button>
-      <button class="nav-btn" onclick="scrollToSection('about')">About</button>
-      <button class="nav-btn" onclick="scrollToSection('contact')">Contact</button>
+      <button class="nav-btn" onclick="goTo('home'); setTimeout(()=>scrollToSection('work'),50)">Work</button>
+      <button class="nav-btn" onclick="goTo('home'); setTimeout(()=>scrollToSection('capabilities'),50)">Toolkit</button>
+      <button class="nav-btn" onclick="goTo('home'); setTimeout(()=>scrollToSection('about'),50)">About</button>
+      <button class="nav-btn" onclick="goTo('home'); setTimeout(()=>scrollToSection('contact'),50)">Contact</button>
       <button class="nav-btn nav-cta" onclick="openResumeModal()">Resume CV</button>
     </div>
     <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation menu">
@@ -38,15 +38,19 @@
 
   <!-- Mobile Dropdown Navigation -->
   <div class="mobile-nav" id="mobileNav">
-    <button class="mobile-nav-link" onclick="scrollToSection('work'); closeMobileNav();">Work</button>
-    <button class="mobile-nav-link" onclick="scrollToSection('capabilities'); closeMobileNav();">Toolkit</button>
-    <button class="mobile-nav-link" onclick="scrollToSection('about'); closeMobileNav();">About</button>
-    <button class="mobile-nav-link" onclick="scrollToSection('contact'); closeMobileNav();">Contact</button>
+    <button class="mobile-nav-link" onclick="goTo('home'); setTimeout(()=>scrollToSection('work'),50); closeMobileNav();">Work</button>
+    <button class="mobile-nav-link" onclick="goTo('home'); setTimeout(()=>scrollToSection('capabilities'),50); closeMobileNav();">Toolkit</button>
+    <button class="mobile-nav-link" onclick="goTo('home'); setTimeout(()=>scrollToSection('about'),50); closeMobileNav();">About</button>
+    <button class="mobile-nav-link" onclick="goTo('home'); setTimeout(()=>scrollToSection('contact'),50); closeMobileNav();">Contact</button>
     <button class="btn-primary" onclick="openResumeModal(); closeMobileNav();" style="margin-top: 12px; width: 100%;">Resume CV</button>
   </div>
 
-  <!-- Main App Shell -->
+  <!-- App Shell SPA Container -->
   <div id="app-shell">
+
+    <!-- =========================================================================
+         PAGE 1: HOME
+         ========================================================================= -->
     <div id="page-home" class="page active">
 
       <!-- HERO SECTION -->
@@ -118,13 +122,13 @@
         <div class="section-label">// FEATURED WORK & CASE STUDIES</div>
         <h2>Selected <em>Projects</em></h2>
         <p class="section-desc">
-          A curated selection of web applications, data analytics dashboards, and interactive tools built with precision and analytical depth.
+          Click any project below to explore its full interactive case study, architecture breakdown, metrics, and before/after comparisons.
         </p>
 
         <div class="projects-grid">
           
           <!-- Project 1: Featured Full Width Split -->
-          <div class="project-card">
+          <div class="project-card" onclick="goTo('analytics-dashboard')">
             <img src="images/dashboard.jpg" alt="Data Analytics & Insights Dashboard" class="project-img">
             <div class="project-overlay"></div>
             <div class="project-number">01</div>
@@ -144,7 +148,7 @@
           </div>
 
           <!-- Project 2: E-Commerce Platform -->
-          <div class="project-card">
+          <div class="project-card" onclick="goTo('commerce-portal')">
             <img src="images/ecommerce.jpg" alt="Smart Commerce Analytics Portal" class="project-img">
             <div class="project-overlay"></div>
             <div class="project-number">02</div>
@@ -163,7 +167,7 @@
           </div>
 
           <!-- Project 3: AI Sentiment Analyzer -->
-          <div class="project-card">
+          <div class="project-card" onclick="goTo('sentiment-ai')">
             <img src="images/ai-analytics.jpg" alt="AI Customer Sentiment NLP Engine" class="project-img">
             <div class="project-overlay"></div>
             <div class="project-number">03</div>
@@ -182,7 +186,7 @@
           </div>
 
           <!-- Project 4: Financial Automation Tool -->
-          <div class="project-card">
+          <div class="project-card" onclick="goTo('financial-reconciliation')">
             <img src="images/financial.jpg" alt="Automated Financial Reconciliation Engine" class="project-img">
             <div class="project-overlay"></div>
             <div class="project-number">04</div>
@@ -332,6 +336,323 @@
       </footer>
 
     </div>
+
+    <!-- =========================================================================
+         PAGE 2: CASE STUDY — ENTERPRISE DATA ANALYTICS DASHBOARD
+         ========================================================================= -->
+    <div id="page-analytics-dashboard" class="page">
+      <section class="case-hero">
+        <div class="hero-bg-img" style="background-image: url('images/dashboard.jpg');"></div>
+        <div class="hero-vignette"></div>
+
+        <div class="case-hero-content container">
+          <div class="breadcrumb">
+            <button class="breadcrumb-btn" onclick="goTo('home')">← WORK</button>
+            <span>/</span>
+            <span>DATA ANALYTICS & BI</span>
+          </div>
+
+          <h1 class="case-title">Enterprise Data Analytics & <em>Insights Platform</em></h1>
+
+          <div class="hero-meta">
+            <div>
+              <div class="meta-label">ROLE</div>
+              <div class="meta-value">Lead Data Analyst & Developer</div>
+            </div>
+            <div>
+              <div class="meta-label">TIMELINE</div>
+              <div class="meta-value">4 Months (2024)</div>
+            </div>
+            <div>
+              <div class="meta-label">STACK</div>
+              <div class="meta-value">SQL, Python, React.js, Chart.js</div>
+            </div>
+            <div>
+              <div class="meta-label">IMPACT</div>
+              <div class="meta-value">+42% Query Speed & 10M+ Records</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Impact Metrics Grid -->
+      <section class="section container">
+        <div class="s-label">// IMPACT METRICS</div>
+        <h2>Key <em>Outcomes</em></h2>
+
+        <div class="impact-grid">
+          <div class="impact-card">
+            <div class="impact-num">+42%</div>
+            <p class="impact-desc">SQL query execution speedup via index optimization and materialization.</p>
+          </div>
+          <div class="impact-card">
+            <div class="impact-num">10M+</div>
+            <p class="impact-desc">Historical data records processed across multi-region warehouse shards.</p>
+          </div>
+          <div class="impact-card">
+            <div class="impact-num">3.5x</div>
+            <p class="impact-desc">Faster executive decision cycle from automated KPI reporting.</p>
+          </div>
+          <div class="impact-card">
+            <div class="impact-num">99.9%</div>
+            <p class="impact-desc">Real-time data pipeline uptime with zero transaction drop.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Overview Body -->
+      <section class="section alt-bg">
+        <div class="container">
+          <div class="s-label">// THE CHALLENGE & SOLUTION</div>
+          <h2>Transforming Raw Data into <em>Actionable Intelligence</em></h2>
+
+          <div class="overview-body">
+            <p>
+              Executive decision-makers faced severe latency delays and inconsistent reporting due to fragmented data warehouses. Query response times frequently exceeded 45 seconds, crippling weekly forecasting operations.
+            </p>
+            <p>
+              I architected an end-to-end analytics platform featuring a optimized SQL query engine, custom React caching layer, and interactive drill-down charts allowing regional managers to isolate revenue leaks within seconds.
+            </p>
+          </div>
+
+          <!-- Interactive Before / After UI Comparison Slider -->
+          <div class="aip-compare-wrap" style="margin-top: 48px;">
+            <div class="s-label" style="margin-bottom: 12px;">// INTERACTIVE BEFORE / AFTER INTERFACE SLIDER (DRAG TO COMPARE)</div>
+            <div class="aip-compare" id="compareSlider1">
+              <span class="aip-compare-label--before">BEFORE (Legacy System)</span>
+              <span class="aip-compare-label--after">AFTER (New Dashboard)</span>
+              <img src="images/dashboard.jpg" alt="Legacy UI" class="aip-compare-before-img">
+              <div class="aip-compare-after" id="compareAfter1">
+                <img src="images/ecommerce.jpg" alt="New UI">
+              </div>
+              <div class="aip-compare-handle" id="compareHandle1">
+                <div class="aip-compare-btn">
+                  <i class="fas fa-arrows-left-right" style="color:#111;"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Next Project Nav -->
+      <a href="javascript:void(0)" class="next-project" onclick="goTo('commerce-portal')">
+        <div class="container next-inner">
+          <div>
+            <div class="next-label">NEXT PROJECT →</div>
+            <div class="next-title">Smart Commerce Analytics Portal</div>
+          </div>
+          <div class="next-arrow">↗</div>
+        </div>
+      </a>
+    </div>
+
+    <!-- =========================================================================
+         PAGE 3: CASE STUDY — SMART COMMERCE ANALYTICS PORTAL
+         ========================================================================= -->
+    <div id="page-commerce-portal" class="page">
+      <section class="case-hero">
+        <div class="hero-bg-img" style="background-image: url('images/ecommerce.jpg');"></div>
+        <div class="hero-vignette"></div>
+
+        <div class="case-hero-content container">
+          <div class="breadcrumb">
+            <button class="breadcrumb-btn" onclick="goTo('home')">← WORK</button>
+            <span>/</span>
+            <span>FRONTEND & REACT</span>
+          </div>
+
+          <h1 class="case-title">Smart Commerce <em>Analytics Portal</em></h1>
+
+          <div class="hero-meta">
+            <div>
+              <div class="meta-label">ROLE</div>
+              <div class="meta-value">Lead Frontend Engineer</div>
+            </div>
+            <div>
+              <div class="meta-label">TIMELINE</div>
+              <div class="meta-value">3 Months (2024)</div>
+            </div>
+            <div>
+              <div class="meta-label">STACK</div>
+              <div class="meta-value">React.js, TypeScript, Tailwind, Chart.js</div>
+            </div>
+            <div>
+              <div class="meta-label">IMPACT</div>
+              <div class="meta-value">2.4x Conversion Increase</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section container">
+        <div class="s-label">// OVERVIEW & ARCHITECTURE</div>
+        <h2>Scaling E-Commerce <em>Performance & Conversion</em></h2>
+
+        <div class="overview-body">
+          <p>
+            An enterprise e-commerce vendor needed real-time visibility into customer cart abandonment, inventory turnover, and ad campaign attribution across 500,000 monthly active shoppers.
+          </p>
+        </div>
+
+        <div class="impact-grid">
+          <div class="impact-card">
+            <div class="impact-num">2.4x</div>
+            <p class="impact-desc">Increase in checkout conversion rates via streamlined checkout analytics.</p>
+          </div>
+          <div class="impact-card">
+            <div class="impact-num">500K</div>
+            <p class="impact-desc">Monthly active shoppers tracked in real-time without client lag.</p>
+          </div>
+          <div class="impact-card">
+            <div class="impact-num">98ms</div>
+            <p class="impact-desc">Average page response time achieved using SSR and optimistic UI updates.</p>
+          </div>
+        </div>
+      </section>
+
+      <a href="javascript:void(0)" class="next-project" onclick="goTo('sentiment-ai')">
+        <div class="container next-inner">
+          <div>
+            <div class="next-label">NEXT PROJECT →</div>
+            <div class="next-title">AI Customer Sentiment NLP Engine</div>
+          </div>
+          <div class="next-arrow">↗</div>
+        </div>
+      </a>
+    </div>
+
+    <!-- =========================================================================
+         PAGE 4: CASE STUDY — AI CUSTOMER SENTIMENT ENGINE
+         ========================================================================= -->
+    <div id="page-sentiment-ai" class="page">
+      <section class="case-hero">
+        <div class="hero-bg-img" style="background-image: url('images/ai-analytics.jpg');"></div>
+        <div class="hero-vignette"></div>
+
+        <div class="case-hero-content container">
+          <div class="breadcrumb">
+            <button class="breadcrumb-btn" onclick="goTo('home')">← WORK</button>
+            <span>/</span>
+            <span>MACHINE LEARNING & AI</span>
+          </div>
+
+          <h1 class="case-title">AI Customer Sentiment <em>NLP Engine</em></h1>
+
+          <div class="hero-meta">
+            <div>
+              <div class="meta-label">ROLE</div>
+              <div class="meta-value">Data Scientist & Developer</div>
+            </div>
+            <div>
+              <div class="meta-label">TIMELINE</div>
+              <div class="meta-value">5 Months (2023)</div>
+            </div>
+            <div>
+              <div class="meta-label">STACK</div>
+              <div class="meta-value">Python, NLTK, Streamlit, PostgreSQL</div>
+            </div>
+            <div>
+              <div class="meta-label">ACCURACY</div>
+              <div class="meta-value">94% Classification Precision</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section container">
+        <div class="s-label">// INTELLIGENCE & INSIGHTS</div>
+        <h2>Automating Sentiment <em>Analysis at Scale</em></h2>
+
+        <div class="impact-grid">
+          <div class="impact-card">
+            <div class="impact-num">94%</div>
+            <p class="impact-desc">Model sentiment classification accuracy validated against human benchmarks.</p>
+          </div>
+          <div class="impact-card">
+            <div class="impact-num">1M+</div>
+            <p class="impact-desc">Social reviews & feedback tickets categorized into key sentiment buckets.</p>
+          </div>
+        </div>
+      </section>
+
+      <a href="javascript:void(0)" class="next-project" onclick="goTo('financial-reconciliation')">
+        <div class="container next-inner">
+          <div>
+            <div class="next-label">NEXT PROJECT →</div>
+            <div class="next-title">Automated Financial Reconciliation Engine</div>
+          </div>
+          <div class="next-arrow">↗</div>
+        </div>
+      </a>
+    </div>
+
+    <!-- =========================================================================
+         PAGE 5: CASE STUDY — AUTOMATED FINANCIAL RECONCILIATION
+         ========================================================================= -->
+    <div id="page-financial-reconciliation" class="page">
+      <section class="case-hero">
+        <div class="hero-bg-img" style="background-image: url('images/financial.jpg');"></div>
+        <div class="hero-vignette"></div>
+
+        <div class="case-hero-content container">
+          <div class="breadcrumb">
+            <button class="breadcrumb-btn" onclick="goTo('home')">← WORK</button>
+            <span>/</span>
+            <span>PYTHON & AUTOMATION</span>
+          </div>
+
+          <h1 class="case-title">Automated Financial <em>Reconciliation Engine</em></h1>
+
+          <div class="hero-meta">
+            <div>
+              <div class="meta-label">ROLE</div>
+              <div class="meta-value">Automation Engineer & Analyst</div>
+            </div>
+            <div>
+              <div class="meta-label">TIMELINE</div>
+              <div class="meta-value">2 Months (2023)</div>
+            </div>
+            <div>
+              <div class="meta-label">STACK</div>
+              <div class="meta-value">Python, Pandas, OpenPyXL, ReportLab</div>
+            </div>
+            <div>
+              <div class="meta-label">EFFICIENCY</div>
+              <div class="meta-value">90% Reduction in Audit Hours</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section container">
+        <div class="s-label">// AUTOMATION & PIPELINES</div>
+        <h2>Eliminating Manual <em>Audit Overhead</em></h2>
+
+        <div class="impact-grid">
+          <div class="impact-card">
+            <div class="impact-num">-90%</div>
+            <p class="impact-desc">Reduction in monthly audit reconciliation turnaround time.</p>
+          </div>
+          <div class="impact-card">
+            <div class="impact-num">0%</div>
+            <p class="impact-desc">Human transcription error rate achieved through automated parser validation.</p>
+          </div>
+        </div>
+      </section>
+
+      <a href="javascript:void(0)" class="next-project" onclick="goTo('analytics-dashboard')">
+        <div class="container next-inner">
+          <div>
+            <div class="next-label">RETURN TO FIRST PROJECT →</div>
+            <div class="next-title">Enterprise Data Analytics Dashboard</div>
+          </div>
+          <div class="next-arrow">↗</div>
+        </div>
+      </a>
+    </div>
+
   </div>
 
   <!-- RESUME CV MODAL -->
@@ -418,6 +739,6 @@
     </div>
   </div>
 
-  <script src="script.js?v=4.0"></script>
+  <script src="script.js?v=5.0"></script>
 </body>
 </html>

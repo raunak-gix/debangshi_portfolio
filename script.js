@@ -219,13 +219,40 @@ export default function StudentFilter({ students }) {
 
   if (copyEmailBtn) {
     copyEmailBtn.addEventListener('click', () => {
-      const email = 'debangshi.data@gmail.com';
+      const email = 'roydebangshi5@gmail.com';
       navigator.clipboard.writeText(email).then(() => {
         toast.classList.add('show');
         setTimeout(() => {
           toast.classList.remove('show');
         }, 3000);
       });
+    });
+  }
+
+  // ------------------------------------------------------------------------
+  // 5b. Resume Modal Drawer Toggle
+  // ------------------------------------------------------------------------
+  const openResumeBtn = document.getElementById('open-resume-btn');
+  const resumeModal = document.getElementById('resume-modal');
+  const resumeModalCloseBtn = document.getElementById('resume-modal-close-btn');
+
+  if (openResumeBtn && resumeModal) {
+    openResumeBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      resumeModal.classList.add('active');
+    });
+  }
+
+  if (resumeModalCloseBtn && resumeModal) {
+    resumeModalCloseBtn.addEventListener('click', () => {
+      resumeModal.classList.remove('active');
+    });
+
+    resumeModal.addEventListener('click', (e) => {
+      if (e.target === resumeModal) {
+        resumeModal.classList.remove('active');
+      }
     });
   }
 

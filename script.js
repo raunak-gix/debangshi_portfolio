@@ -256,6 +256,16 @@ export default function StudentFilter({ students }) {
     });
   }
 
+  const downloadCvTop = document.getElementById('download-cv-btn-top');
+  const downloadCvBottom = document.getElementById('download-cv-btn-bottom');
+
+  function triggerCvPrint() {
+    window.print();
+  }
+
+  if (downloadCvTop) downloadCvTop.addEventListener('click', triggerCvPrint);
+  if (downloadCvBottom) downloadCvBottom.addEventListener('click', triggerCvPrint);
+
   // ------------------------------------------------------------------------
   // 6. Number Counter Animation on Scroll for Impact Section
   // ------------------------------------------------------------------------

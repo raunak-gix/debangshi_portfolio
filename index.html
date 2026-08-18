@@ -515,9 +515,16 @@
       <button class="modal-close" id="resume-modal-close-btn">&times;</button>
       
       <div class="resume-header">
-        <div class="resume-tag">CURRICULUM VITAE // OFFICIAL RESUME</div>
-        <h2 class="resume-name">DEBANGSHI ROY</h2>
-        <h3 class="resume-role">FRONTEND DEVELOPER | ASPIRING DATA ANALYST</h3>
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; flex-wrap: wrap; margin-bottom: 12px;">
+          <div>
+            <div class="resume-tag">CURRICULUM VITAE // OFFICIAL RESUME</div>
+            <h2 class="resume-name">DEBANGSHI ROY</h2>
+            <h3 class="resume-role">FRONTEND DEVELOPER | ASPIRING DATA ANALYST</h3>
+          </div>
+          <button id="download-cv-btn-top" class="btn btn-yellow btn-sm" style="margin-right: 44px;">
+            <i class="fa-solid fa-download"></i> DOWNLOAD CV
+          </button>
+        </div>
         
         <div class="resume-contact-bar">
           <span><i class="fa-solid fa-location-dot"></i> Kolkata, West Bengal</span>
@@ -648,6 +655,13 @@
           </div>
           <div class="resume-item-sub">Meghnad Saha Institute of Technology, Kolkata | <strong>7.40 GPA</strong></div>
         </div>
+      </div>
+
+      <!-- Bottom Action Bar -->
+      <div style="margin-top: 32px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.15); text-align: center;">
+        <button id="download-cv-btn-bottom" class="btn btn-yellow">
+          <i class="fa-solid fa-file-pdf"></i> DOWNLOAD / PRINT DEBANGSHI'S CV
+        </button>
       </div>
 
     </div>

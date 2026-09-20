@@ -483,5 +483,129 @@ export default function StudentFilter({ students }) {
 
     animateContactBg();
   }
+
+  // ------------------------------------------------------------------------
+  // 9. Portfolio-Wide Interactive Floating Tech Particles Canvas Engine
+  // ------------------------------------------------------------------------
+  const globalCanvas = document.getElementById('global-particle-canvas');
+  if (globalCanvas) {
+    const ctx = globalCanvas.getContext('2d');
+    let width = (globalCanvas.width = window.innerWidth);
+    let height = (globalCanvas.height = window.innerHeight);
+
+    let mouse = { x: null, y: null, radius: 150 };
+
+    window.addEventListener('mousemove', (e) => {
+      mouse.x = e.clientX;
+      mouse.y = e.clientY;
+    });
+
+    window.addEventListener('mouseleave', () => {
+      mouse.x = null;
+      mouse.y = null;
+    });
+
+    window.addEventListener('resize', () => {
+      width = globalCanvas.width = window.innerWidth;
+      height = globalCanvas.height = window.innerHeight;
+    });
+
+    const particles = [];
+    const particleCount = 45;
+    const symbols = ['+', '< />', '{ }', '[ ]', '✦', '01', 'sql', 'py', 'js', 'react', 'html', 'data', 'csv'];
+
+    class GlobalParticle {
+      constructor() {
+        this.x = Math.random() * width;
+        this.y = Math.random() * height;
+        this.vx = (Math.random() - 0.5) * 0.4;
+        this.vy = (Math.random() - 0.5) * 0.4;
+        this.size = Math.random() * 3 + 2;
+        this.symbol = symbols[Math.floor(Math.random() * symbols.length)];
+        this.isSymbol = Math.random() > 0.5;
+        this.baseAlpha = Math.random() * 0.35 + 0.15;
+        this.alpha = this.baseAlpha;
+      }
+
+      update() {
+        this.x += this.vx;
+        this.y += this.vy;
+
+        if (this.x < 0) this.x = width;
+        if (this.x > width) this.x = 0;
+        if (this.y < 0) this.y = height;
+        if (this.y > height) this.y = 0;
+
+        // Mouse interaction: gentle repulsion effect
+        if (mouse.x !== null && mouse.y !== null) {
+          const dx = mouse.x - this.x;
+          const dy = mouse.y - this.y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+          if (distance < mouse.radius) {
+            const angle = Math.atan2(dy, dx);
+            const force = (mouse.radius - distance) / mouse.radius;
+            this.x -= Math.cos(angle) * force * 2;
+            this.y -= Math.sin(angle) * force * 2;
+            this.alpha = Math.min(1, this.baseAlpha + 0.4);
+          } else {
+            this.alpha = this.baseAlpha;
+          }
+        }
+      }
+
+      draw() {
+        const isDark = document.body.classList.contains('dark-mode');
+        ctx.fillStyle = isDark
+          ? `rgba(255, 221, 0, ${this.alpha})`
+          : `rgba(139, 92, 246, ${this.alpha})`;
+
+        if (this.isSymbol) {
+          ctx.font = '11px JetBrains Mono, monospace';
+          ctx.fillText(this.symbol, this.x, this.y);
+        } else {
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      }
+    }
+
+    for (let i = 0; i < particleCount; i++) {
+      particles.push(new GlobalParticle());
+    }
+
+    function animateGlobalBg() {
+      ctx.clearRect(0, 0, width, height);
+      const isDark = document.body.classList.contains('dark-mode');
+
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+
+          if (dist < 130) {
+            ctx.beginPath();
+            ctx.strokeStyle = isDark
+              ? `rgba(255, 221, 0, ${0.1 * (1 - dist / 130)})`
+              : `rgba(139, 92, 246, ${0.08 * (1 - dist / 130)})`;
+            ctx.lineWidth = 1;
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.stroke();
+          }
+        }
+      }
+
+      particles.forEach(p => {
+        p.update();
+        p.draw();
+      });
+
+      requestAnimationFrame(animateGlobalBg);
+    }
+
+    animateGlobalBg();
+  }
 });
 

@@ -153,10 +153,16 @@ header, section, footer, .modal-overlay, .toast {
 
 .hero-section,
 .about-section,
-.experience-section,
-.techstack-section,
-.work-section {
+.techstack-section {
   background: transparent !important;
+}
+
+/* Opaque Solid Surface Backgrounds for Experience & Projects to hide the background animation */
+.experience-section,
+.work-section {
+  background: var(--bg-surface) !important;
+  position: relative;
+  z-index: 3;
 }
 
 /* Container */

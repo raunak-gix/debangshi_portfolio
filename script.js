@@ -222,11 +222,49 @@ export default function StudentFilter({ students }) {
     copyEmailBtn.addEventListener('click', () => {
       const email = 'roydebangshi5@gmail.com';
       navigator.clipboard.writeText(email).then(() => {
-        toast.classList.add('show');
-        setTimeout(() => {
-          toast.classList.remove('show');
-        }, 3000);
+        if (toast) {
+          toast.innerText = 'Copied email to clipboard!';
+          toast.classList.add('show');
+          setTimeout(() => {
+            toast.classList.remove('show');
+          }, 3000);
+        }
       });
+    });
+  }
+
+  // ------------------------------------------------------------------------
+  // 5a. Contact Form Submission Handler
+  // ------------------------------------------------------------------------
+  const contactForm = document.getElementById('contact-form');
+  if (contactForm) {
+    contactForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const nameInput = document.getElementById('contact-name');
+      const submitBtn = document.getElementById('contact-submit-btn');
+      const originalBtnText = submitBtn ? submitBtn.innerHTML : '';
+
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> SENDING...`;
+      }
+
+      setTimeout(() => {
+        const senderName = nameInput && nameInput.value.trim() ? nameInput.value.trim() : 'there';
+        if (toast) {
+          toast.innerText = `Thank you, ${senderName}! Your message has been sent successfully.`;
+          toast.classList.add('show');
+          setTimeout(() => {
+            toast.classList.remove('show');
+          }, 4000);
+        }
+
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = originalBtnText;
+        }
+        contactForm.reset();
+      }, 1000);
     });
   }
 

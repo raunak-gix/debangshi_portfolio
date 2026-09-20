@@ -1237,64 +1237,187 @@ body.dark-mode .playground-box:hover {
   font-weight: 800;
   color: var(--text-main);
   line-height: 1.2;
+  margin-bottom: 12px;
+}
+
+.contact-subtitle {
+  font-size: 16px;
+  color: var(--text-muted);
   margin-bottom: 40px;
 }
 
-.email-action-box {
-  display: inline-flex;
-  align-items: center;
-  gap: 16px;
+.contact-card {
+  max-width: 800px;
+  margin: 0 auto 60px auto;
   background: #ffffff;
   border: 2.5px solid #0f172a;
-  box-shadow: 6px 6px 0px #0f172a;
-  padding: 16px 28px;
-  border-radius: 0 !important;
-  margin-bottom: 60px;
+  box-shadow: 8px 8px 0px #0f172a;
+  padding: 36px;
+  text-align: left;
   transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-body.dark-mode .email-action-box {
+body.dark-mode .contact-card {
   background: #1c1d29;
   border-color: #ffffff;
-  box-shadow: 6px 6px 0px #ffdd00;
+  box-shadow: 8px 8px 0px var(--accent-yellow);
 }
 
-.email-action-box:hover {
-  transform: translate(-5px, -5px);
-  box-shadow: 11px 11px 0px #0f172a;
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
-body.dark-mode .email-action-box:hover {
-  box-shadow: 11px 11px 0px #ffdd00;
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
 }
 
-.email-link {
+@media (max-width: 640px) {
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+  .contact-card {
+    padding: 24px 18px;
+  }
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group label {
   font-family: var(--font-mono);
-  font-size: 20px;
-  font-weight: 800;
-  color: #0f172a;
-  text-decoration: none;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-main);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
-body.dark-mode .email-link {
+.form-group label i {
+  color: var(--accent-purple);
+}
+
+body.dark-mode .form-group label i {
   color: var(--accent-yellow);
 }
 
-.copy-btn {
+.required-star {
+  color: #ef4444;
+}
+
+.form-control {
+  width: 100%;
+  padding: 12px 16px;
+  font-family: var(--font-sans);
+  font-size: 15px;
+  background: #f8fafc;
+  color: #0f172a;
+  border: 2px solid #0f172a;
+  border-radius: 0 !important;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+body.dark-mode .form-control {
+  background: #12131a;
+  color: #f8fafc;
+  border-color: #ffffff;
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: var(--accent-purple);
+  box-shadow: 3px 3px 0px #0f172a;
+  background: #ffffff;
+}
+
+body.dark-mode .form-control:focus {
+  border-color: var(--accent-yellow);
+  box-shadow: 3px 3px 0px var(--accent-yellow);
+  background: #181924;
+}
+
+.form-control::placeholder {
+  color: #94a3b8;
+  font-size: 14px;
+}
+
+textarea.form-control {
+  resize: vertical;
+  min-height: 110px;
+}
+
+.form-action {
+  margin-top: 10px;
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 14px 28px;
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  justify-content: center;
+}
+
+.quick-contact-bar {
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 2px dashed rgba(15, 23, 42, 0.2);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+body.dark-mode .quick-contact-bar {
+  border-top-color: rgba(255, 255, 255, 0.2);
+}
+
+.quick-info-item {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.quick-info-item i {
+  color: var(--accent-purple);
+}
+
+body.dark-mode .quick-info-item i {
+  color: var(--accent-yellow);
+}
+
+.copy-btn-sm {
   background: none;
   border: none;
-  color: #0f172a;
-  font-size: 20px;
+  color: var(--text-main);
+  font-size: 14px;
   cursor: pointer;
+  padding: 2px 4px;
   transition: transform 0.2s ease;
 }
 
-body.dark-mode .copy-btn {
-  color: #ffffff;
+.copy-btn-sm:hover {
+  transform: scale(1.2);
+  color: var(--accent-purple);
 }
 
-.copy-btn:hover {
-  transform: scale(1.2);
+body.dark-mode .copy-btn-sm:hover {
+  color: var(--accent-yellow);
 }
 
 .footer-bottom {

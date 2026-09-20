@@ -1506,17 +1506,18 @@ body.dark-mode .form-group label i {
   padding: 10px 14px;
   font-family: var(--font-sans);
   font-size: 14px;
+  font-weight: 500;
   background: #f8fafc;
   color: #0f172a;
   border: 2px solid #0f172a;
   border-radius: 0 !important;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 body.dark-mode .form-control {
   background: #12131a;
   color: #f8fafc;
-  border-color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.7);
 }
 
 .form-control:focus {
@@ -1530,6 +1531,54 @@ body.dark-mode .form-control:focus {
   border-color: var(--accent-yellow);
   box-shadow: 3px 3px 0px var(--accent-yellow);
   background: #181924;
+}
+
+/* Styled state when user fills in text */
+.form-control:not(:placeholder-shown) {
+  border-left: 4px solid #8b5cf6;
+  font-weight: 600;
+}
+
+body.dark-mode .form-control:not(:placeholder-shown) {
+  border-left: 4px solid var(--accent-yellow);
+  background: #181926;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+/* Fix Browser Default Autofill (prevents ugly light-blue / white browser box overlay) */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+textarea:-webkit-autofill:active {
+  -webkit-text-fill-color: #0f172a !important;
+  -webkit-box-shadow: 0 0 0px 1000px #ffffff inset !important;
+  border: 2px solid #8b5cf6 !important;
+  border-left: 5px solid #8b5cf6 !important;
+  font-family: var(--font-sans) !important;
+  font-size: 14px !important;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+body.dark-mode input:-webkit-autofill,
+body.dark-mode input:-webkit-autofill:hover,
+body.dark-mode input:-webkit-autofill:focus,
+body.dark-mode input:-webkit-autofill:active,
+body.dark-mode textarea:-webkit-autofill,
+body.dark-mode textarea:-webkit-autofill:hover,
+body.dark-mode textarea:-webkit-autofill:focus,
+body.dark-mode textarea:-webkit-autofill:active {
+  -webkit-text-fill-color: #ffffff !important;
+  -webkit-box-shadow: 0 0 0px 1000px #181926 inset !important;
+  border: 2px solid var(--accent-yellow) !important;
+  border-left: 5px solid var(--accent-yellow) !important;
+  font-family: var(--font-sans) !important;
+  font-size: 14px !important;
+  transition: background-color 5000s ease-in-out 0s;
 }
 
 .form-control::placeholder {

@@ -2163,3 +2163,363 @@ body.light-mode .resume-item-sub {
     display: none !important;
   }
 }
+
+/* ==========================================================================
+   RETRO ARCADE TV GAME CABINET STYLES
+   ========================================================================== */
+.game-section {
+  padding: 80px 0;
+}
+
+.tv-monitor-cabinet {
+  max-width: 840px;
+  margin: 32px auto 0;
+  background: #0d0e15;
+  border: 3px solid #0f172a;
+  box-shadow: 8px 8px 0px #0f172a;
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+body.dark-mode .tv-monitor-cabinet {
+  background: #0d0e15;
+  border: 3px solid #ffffff;
+  box-shadow: 8px 8px 0px #ffdd00;
+}
+
+.tv-window-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #161824;
+  padding: 10px 18px;
+  border-bottom: 2px solid #282a3d;
+  font-family: var(--font-mono);
+  font-size: 12px;
+}
+
+.tv-window-dots {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.window-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.dot-red { background: #ef4444; }
+.dot-yellow { background: #facc15; }
+.dot-green { background: #10b981; }
+
+.tv-brand-tag {
+  font-weight: 800;
+  color: #ffdd00;
+  letter-spacing: 0.5px;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tv-power-indicator {
+  color: #10b981;
+  font-weight: 800;
+  font-size: 11px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  letter-spacing: 0.5px;
+}
+
+.power-led-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #10b981;
+  box-shadow: 0 0 8px #10b981;
+  animation: ledPulse 2s infinite ease-in-out;
+}
+
+@keyframes ledPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.85); }
+}
+
+.tv-screen-bezel {
+  padding: 20px;
+  background: #090a10;
+}
+
+.arcade-top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.arcade-title {
+  font-family: var(--font-mono);
+  font-weight: 800;
+  font-size: 15px;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.arcade-glow-icon {
+  color: #ffdd00;
+  font-size: 18px;
+}
+
+.version-tag {
+  background: #ffdd00;
+  color: #0f1015;
+  font-size: 10px;
+  padding: 2px 6px;
+  font-weight: 800;
+  border-radius: 2px;
+}
+
+.arcade-stats {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.stat-pill {
+  background: #141624;
+  border: 1.5px solid #2e3250;
+  padding: 6px 14px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 800;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border-radius: 4px;
+}
+
+.stat-pill.stat-high { border-color: #ffdd00; color: #ffdd00; }
+.stat-pill.stat-score { border-color: #38bdf8; color: #38bdf8; }
+.stat-pill.stat-lives { border-color: #ef4444; color: #ef4444; }
+
+.arcade-screen-wrapper {
+  position: relative;
+  width: 100%;
+  background: #05060a;
+  border: 2px solid #282a3d;
+  border-radius: 6px;
+  overflow: hidden;
+  aspect-ratio: 750 / 420;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#arcade-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+  background: #05060a;
+}
+
+.crt-scanlines {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
+  background-size: 100% 4px;
+  opacity: 0.35;
+  z-index: 2;
+}
+
+.tv-glass-glare {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 60%;
+  height: 60%;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0) 100%);
+  pointer-events: none;
+  z-index: 3;
+}
+
+.arcade-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(9, 10, 16, 0.94);
+  backdrop-filter: blur(4px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  text-align: center;
+  z-index: 10;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.arcade-overlay.hidden {
+  display: none !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  visibility: hidden !important;
+}
+
+.overlay-content {
+  max-width: 560px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.arcade-badge {
+  background: #ffdd00;
+  color: #0f1015;
+  font-family: var(--font-mono);
+  font-weight: 800;
+  font-size: 11px;
+  padding: 4px 10px;
+  letter-spacing: 1px;
+}
+
+.overlay-title {
+  font-size: 26px;
+  font-weight: 800;
+  color: #ffffff;
+  margin: 0;
+  letter-spacing: -0.5px;
+}
+
+.overlay-desc {
+  font-size: 14px;
+  color: #cbd5e1;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.instruction-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin: 8px 0;
+}
+
+.inst-pill {
+  background: #141624;
+  border: 1.5px solid #2e3250;
+  padding: 6px 12px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border-radius: 4px;
+}
+
+.arcade-start-btn {
+  margin-top: 8px;
+  font-size: 15px;
+  padding: 12px 28px;
+  cursor: pointer;
+}
+
+.arcade-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 16px;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.arcade-ctrl-btn {
+  background: #ffdd00;
+  color: #0f1015;
+  border: 2.5px solid #0f172a;
+  padding: 10px 22px;
+  font-family: var(--font-mono);
+  font-weight: 800;
+  font-size: 13px;
+  cursor: pointer;
+  box-shadow: 4px 4px 0px #0f172a;
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+body.dark-mode .arcade-ctrl-btn {
+  border-color: #ffffff;
+  box-shadow: 4px 4px 0px #ffffff;
+}
+
+.arcade-ctrl-btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0px #0f172a;
+}
+
+body.dark-mode .arcade-ctrl-btn:active {
+  box-shadow: 2px 2px 0px #ffffff;
+}
+
+.control-tip {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: #94a3b8;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.tv-stand-base {
+  display: flex;
+  justify-content: space-between;
+  width: 60%;
+  margin: -2px auto 0 auto;
+  height: 14px;
+  position: relative;
+  z-index: 1;
+}
+
+.tv-foot {
+  width: 50px;
+  height: 100%;
+  background: #161824;
+  border: 2.5px solid #0f172a;
+  border-top: none;
+}
+
+body.dark-mode .tv-foot {
+  border-color: #ffffff;
+}
+
+@media (max-width: 640px) {
+  .arcade-top-bar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .arcade-controls {
+    flex-direction: column;
+    width: 100%;
+  }
+  .arcade-ctrl-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}

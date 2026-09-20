@@ -35,6 +35,7 @@
       
       <nav class="nav-links">
         <a href="#intro" class="nav-link active">INTRO</a>
+        <a href="#game" class="nav-link">GAME</a>
         <a href="#about" class="nav-link">ABOUT</a>
         <a href="#experience" class="nav-link">EXPERIENCE</a>
         <a href="#techstack" class="nav-link">TECH STACK</a>
@@ -112,6 +113,91 @@
       </div>
     </div>
   </div>
+
+  <hr class="section-divider">
+
+  <!-- FUN MINI GAME SECTION -->
+  <section class="game-section" id="game">
+    <div class="container">
+      <div class="center-header">
+        <div class="badge-pill">INTERACTIVE ARCADE</div>
+        <h2 class="section-title">Take a Break & <span class="yellow-highlight">Play a Quick Game!</span></h2>
+        <p class="section-subtitle">Catch falling tech skills (HTML, JS, Python, SQL) and dodge bugs 🐞 to set high scores!</p>
+      </div>
+
+      <!-- Retro TV Monitor Window Cabinet Container -->
+      <div class="tv-monitor-cabinet">
+        <!-- TV Top Window Header Bar -->
+        <div class="tv-window-header">
+          <div class="tv-window-dots">
+            <span class="window-dot dot-red"></span>
+            <span class="window-dot dot-yellow"></span>
+            <span class="window-dot dot-green"></span>
+          </div>
+          <div class="tv-brand-tag"><i class="fa-solid fa-tv"></i> DEBANGSHI CRT-88 // RETRO ARCADE TV</div>
+          <div class="tv-power-indicator"><span class="power-led-dot"></span> POWER ON</div>
+        </div>
+
+        <!-- TV Bezel Screen Frame -->
+        <div class="tv-screen-bezel">
+          <!-- Arcade Header Stats Bar -->
+          <div class="arcade-top-bar">
+            <div class="arcade-title">
+              <i class="fa-solid fa-gamepad arcade-glow-icon"></i> 
+              <span class="title-text">CODE & DATA CATCHER</span> 
+              <span class="version-tag">v2.0 PRO</span>
+            </div>
+            <div class="arcade-stats">
+              <div class="stat-pill stat-high"><i class="fa-solid fa-trophy"></i> HIGH: <span id="game-highscore">0</span></div>
+              <div class="stat-pill stat-score"><i class="fa-solid fa-bolt"></i> SCORE: <span id="game-score">0</span></div>
+              <div class="stat-pill stat-lives"><i class="fa-solid fa-heart"></i> LIVES: <span id="game-lives">❤️❤️❤️</span></div>
+            </div>
+          </div>
+
+          <!-- Arcade Canvas Screen -->
+          <div class="arcade-screen-wrapper">
+            <canvas id="arcade-canvas" width="750" height="420"></canvas>
+            <div class="crt-scanlines"></div>
+            <div class="tv-glass-glare"></div>
+            
+            <!-- Overlay Screen (Start / Game Over) -->
+            <div class="arcade-overlay" id="arcade-overlay">
+              <div class="overlay-content">
+                <div class="arcade-badge">ARCADE EDITION</div>
+                <h3 class="overlay-title" id="overlay-title">CATCH THE TECH SKILLS!</h3>
+                <p class="overlay-desc" id="overlay-desc">Move the catcher using your <strong>Mouse</strong>, <strong>Arrow Keys [← →]</strong>, or <strong>On-Screen Buttons</strong>!</p>
+                
+                <div class="instruction-row">
+                  <div class="inst-pill"><i class="fa-brands fa-html5" style="color:#ff6b4a;"></i> HTML +10</div>
+                  <div class="inst-pill"><i class="fa-brands fa-js" style="color:#facc15;"></i> JS +15</div>
+                  <div class="inst-pill"><i class="fa-brands fa-python" style="color:#60a5fa;"></i> PYTHON +20</div>
+                  <div class="inst-pill"><i class="fa-solid fa-database" style="color:#c084fc;"></i> SQL +20</div>
+                  <div class="inst-pill"><i class="fa-solid fa-bug" style="color:#ef4444;"></i> DODGE BUGS!</div>
+                </div>
+
+                <button class="btn btn-yellow btn-lg arcade-start-btn" id="start-game-btn">
+                  <i class="fa-solid fa-circle-play"></i> START PLAYING
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Arcade Controls -->
+          <div class="arcade-controls">
+            <button class="arcade-ctrl-btn" id="ctrl-left" aria-label="Move Left"><i class="fa-solid fa-arrow-left"></i> MOVE LEFT</button>
+            <div class="control-tip"><i class="fa-solid fa-keyboard"></i> Use ← → keys or drag Mouse</div>
+            <button class="arcade-ctrl-btn" id="ctrl-right" aria-label="Move Right">MOVE RIGHT <i class="fa-solid fa-arrow-right"></i></button>
+          </div>
+        </div>
+
+        <!-- TV Stand Feet -->
+        <div class="tv-stand-base">
+          <div class="tv-foot foot-left"></div>
+          <div class="tv-foot foot-right"></div>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <hr class="section-divider">
 

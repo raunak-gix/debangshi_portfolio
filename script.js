@@ -607,5 +607,288 @@ export default function StudentFilter({ students }) {
 
     animateGlobalBg();
   }
+
+  // ------------------------------------------------------------------------
+  // 10. Code & Data Catcher Arcade Mini Game Engine
+  // ------------------------------------------------------------------------
+  const arcadeCanvas = document.getElementById('arcade-canvas');
+  if (arcadeCanvas) {
+    const actx = arcadeCanvas.getContext('2d');
+    const startBtn = document.getElementById('start-game-btn');
+    const arcadeOverlay = document.getElementById('arcade-overlay');
+    const overlayTitle = document.getElementById('overlay-title');
+    const overlayDesc = document.getElementById('overlay-desc');
+
+    const scoreEl = document.getElementById('game-score');
+    const highScoreEl = document.getElementById('game-highscore');
+    const livesEl = document.getElementById('game-lives');
+
+    const ctrlLeft = document.getElementById('ctrl-left');
+    const ctrlRight = document.getElementById('ctrl-right');
+
+    const cWidth = arcadeCanvas.width;
+    const cHeight = arcadeCanvas.height;
+
+    let score = 0;
+    let highScore = parseInt(localStorage.getItem('debangshi_arcade_highscore') || '0', 10);
+    let lives = 3;
+    let isPlaying = false;
+    let gameLoopId = null;
+    let frameCount = 0;
+
+    if (highScoreEl) highScoreEl.innerText = highScore;
+
+    const paddle = {
+      x: cWidth / 2 - 60,
+      y: cHeight - 32,
+      width: 120,
+      height: 18,
+      speed: 11
+    };
+
+    const fallingItems = [];
+    const catchEffects = [];
+    const keys = { left: false, right: false };
+
+    const itemTypes = [
+      { text: 'HTML5', pts: 10, color: '#ff6b4a', isBug: false },
+      { text: 'JS DOM', pts: 15, color: '#facc15', isBug: false },
+      { text: 'PYTHON', pts: 20, color: '#60a5fa', isBug: false },
+      { text: 'SQL', pts: 20, color: '#c084fc', isBug: false },
+      { text: 'TABLEAU', pts: 25, color: '#38bdf8', isBug: false },
+      { text: '🐞 BUG', pts: -1, color: '#ef4444', isBug: true }
+    ];
+
+    window.addEventListener('keydown', (e) => {
+      if (!isPlaying) return;
+      if (e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A') keys.left = true;
+      if (e.key === 'ArrowRight' || e.key === 'd' || e.key === 'D') keys.right = true;
+    });
+
+    window.addEventListener('keyup', (e) => {
+      if (e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A') keys.left = false;
+      if (e.key === 'ArrowRight' || e.key === 'd' || e.key === 'D') keys.right = false;
+    });
+
+    // Mouse & Touch Drag Controls
+    arcadeCanvas.addEventListener('mousemove', (e) => {
+      if (!isPlaying) return;
+      const rect = arcadeCanvas.getBoundingClientRect();
+      const mouseX = ((e.clientX - rect.left) / rect.width) * cWidth;
+      paddle.x = mouseX - paddle.width / 2;
+    });
+
+    if (ctrlLeft && ctrlRight) {
+      ctrlLeft.addEventListener('mousedown', () => (keys.left = true));
+      ctrlLeft.addEventListener('mouseup', () => (keys.left = false));
+      ctrlLeft.addEventListener('mouseleave', () => (keys.left = false));
+      ctrlLeft.addEventListener('touchstart', (e) => { e.preventDefault(); keys.left = true; });
+      ctrlLeft.addEventListener('touchend', () => (keys.left = false));
+
+      ctrlRight.addEventListener('mousedown', () => (keys.right = true));
+      ctrlRight.addEventListener('mouseup', () => (keys.right = false));
+      ctrlRight.addEventListener('mouseleave', () => (keys.right = false));
+      ctrlRight.addEventListener('touchstart', (e) => { e.preventDefault(); keys.right = true; });
+      ctrlRight.addEventListener('touchend', () => (keys.right = false));
+    }
+
+    function spawnItem() {
+      const typeIndex = Math.random() < 0.26 ? 5 : Math.floor(Math.random() * 5);
+      const type = itemTypes[typeIndex];
+      const itemWidth = type.isBug ? 50 : 64;
+      const x = Math.random() * (cWidth - itemWidth);
+      const baseSpeed = 2.4 + Math.random() * 1.6 + Math.floor(score / 60) * 0.4;
+
+      fallingItems.push({
+        x: x,
+        y: -30,
+        width: itemWidth,
+        height: 24,
+        speed: baseSpeed,
+        type: type
+      });
+    }
+
+    function updateLivesUI() {
+      if (!livesEl) return;
+      let hearts = '';
+      for (let i = 0; i < lives; i++) hearts += '❤️';
+      for (let i = lives; i < 3; i++) hearts += '🖤';
+      livesEl.innerText = hearts;
+    }
+
+    function startGame() {
+      score = 0;
+      lives = 3;
+      fallingItems.length = 0;
+      catchEffects.length = 0;
+      paddle.x = cWidth / 2 - paddle.width / 2;
+      frameCount = 0;
+
+      if (scoreEl) scoreEl.innerText = '0';
+      updateLivesUI();
+
+      if (arcadeOverlay) arcadeOverlay.classList.add('hidden');
+      isPlaying = true;
+      if (gameLoopId) cancelAnimationFrame(gameLoopId);
+      gameLoop();
+    }
+
+    function gameOver() {
+      isPlaying = false;
+      if (gameLoopId) cancelAnimationFrame(gameLoopId);
+
+      if (score > highScore) {
+        highScore = score;
+        localStorage.setItem('debangshi_arcade_highscore', highScore.toString());
+        if (highScoreEl) highScoreEl.innerText = highScore;
+        if (overlayTitle) overlayTitle.innerText = '🏆 NEW HIGH SCORE!';
+        if (overlayDesc) overlayDesc.innerHTML = `Awesome job! You scored <strong>${score} points</strong> and set a new personal record!`;
+      } else {
+        if (overlayTitle) overlayTitle.innerText = 'GAME OVER!';
+        if (overlayDesc) overlayDesc.innerHTML = `You caught <strong>${score} points</strong> worth of code & data! Try again to beat the high score!`;
+      }
+
+      if (startBtn) startBtn.innerHTML = `<i class="fa-solid fa-rotate-right"></i> PLAY AGAIN`;
+      if (arcadeOverlay) arcadeOverlay.classList.remove('hidden');
+    }
+
+    function gameLoop() {
+      if (!isPlaying) return;
+      frameCount++;
+
+      const spawnRate = Math.max(25, 45 - Math.floor(score / 40));
+      if (frameCount % spawnRate === 0) {
+        spawnItem();
+      }
+
+      if (keys.left) paddle.x -= paddle.speed;
+      if (keys.right) paddle.x += paddle.speed;
+
+      if (paddle.x < 0) paddle.x = 0;
+      if (paddle.x + paddle.width > cWidth) paddle.x = cWidth - paddle.width;
+
+      actx.clearRect(0, 0, cWidth, cHeight);
+
+      // Draw Retro Neon Grid Lines Background
+      actx.strokeStyle = 'rgba(56, 189, 248, 0.07)';
+      actx.lineWidth = 1;
+      for (let x = 0; x < cWidth; x += 36) {
+        actx.beginPath();
+        actx.moveTo(x, 0);
+        actx.lineTo(x, cHeight);
+        actx.stroke();
+      }
+      for (let y = 0; y < cHeight; y += 36) {
+        actx.beginPath();
+        actx.moveTo(0, y);
+        actx.lineTo(cWidth, y);
+        actx.stroke();
+      }
+
+      // Update & Draw Falling Skill Pills
+      for (let i = fallingItems.length - 1; i >= 0; i--) {
+        const item = fallingItems[i];
+        item.y += item.speed;
+
+        // Neon Glow for Special Items
+        actx.save();
+        if (item.type.isBug) {
+          actx.shadowColor = '#ef4444';
+          actx.shadowBlur = 8;
+        } else if (item.type.pts >= 20) {
+          actx.shadowColor = item.type.color;
+          actx.shadowBlur = 10;
+        }
+
+        // Draw Skill Block
+        actx.fillStyle = item.type.color;
+        actx.fillRect(item.x, item.y, item.width, item.height);
+        actx.strokeStyle = '#ffffff';
+        actx.lineWidth = 2;
+        actx.strokeRect(item.x, item.y, item.width, item.height);
+        actx.restore();
+
+        // Label Text
+        actx.fillStyle = item.type.isBug ? '#ffffff' : '#0f1015';
+        actx.font = '800 11px JetBrains Mono, monospace';
+        actx.textAlign = 'center';
+        actx.textBaseline = 'middle';
+        actx.fillText(item.type.text, item.x + item.width / 2, item.y + item.height / 2);
+
+        // Collision Check with Paddle
+        if (
+          item.y + item.height >= paddle.y &&
+          item.y <= paddle.y + paddle.height &&
+          item.x + item.width >= paddle.x &&
+          item.x <= paddle.x + paddle.width
+        ) {
+          if (item.type.isBug) {
+            lives--;
+            updateLivesUI();
+            catchEffects.push({ x: item.x, y: item.y, text: '🐞 BUG! -1 LIFE', color: '#ef4444', alpha: 1, scale: 1.2 });
+            if (lives <= 0) {
+              gameOver();
+              return;
+            }
+          } else {
+            score += item.type.pts;
+            if (scoreEl) scoreEl.innerText = score;
+            catchEffects.push({ x: item.x, y: item.y, text: `+${item.type.pts}`, color: item.type.color, alpha: 1, scale: 1 });
+          }
+
+          fallingItems.splice(i, 1);
+          continue;
+        }
+
+        if (item.y > cHeight) {
+          fallingItems.splice(i, 1);
+        }
+      }
+
+      // Draw Floating Point Particles / Catch Effects
+      for (let i = catchEffects.length - 1; i >= 0; i--) {
+        const fx = catchEffects[i];
+        fx.y -= 1.4;
+        fx.alpha -= 0.025;
+        actx.save();
+        actx.fillStyle = fx.color;
+        actx.shadowColor = fx.color;
+        actx.shadowBlur = 8;
+        actx.font = '800 14px JetBrains Mono, monospace';
+        actx.globalAlpha = Math.max(0, fx.alpha);
+        actx.fillText(fx.text, fx.x + 30, fx.y);
+        actx.restore();
+
+        if (fx.alpha <= 0) {
+          catchEffects.splice(i, 1);
+        }
+      }
+
+      // Draw Player Paddle with Neon Glow
+      actx.save();
+      actx.shadowColor = '#ffdd00';
+      actx.shadowBlur = 12;
+      actx.fillStyle = '#ffdd00';
+      actx.fillRect(paddle.x, paddle.y, paddle.width, paddle.height);
+      actx.strokeStyle = '#ffffff';
+      actx.lineWidth = 2.5;
+      actx.strokeRect(paddle.x, paddle.y, paddle.width, paddle.height);
+      actx.restore();
+
+      // Paddle Label
+      actx.fillStyle = '#0f1015';
+      actx.font = '800 11px JetBrains Mono, monospace';
+      actx.textAlign = 'center';
+      actx.textBaseline = 'middle';
+      actx.fillText('[ 💻 DEBANGSHI ]', paddle.x + paddle.width / 2, paddle.y + paddle.height / 2);
+
+      gameLoopId = requestAnimationFrame(gameLoop);
+    }
+
+    if (startBtn) {
+      startBtn.addEventListener('click', startGame);
+    }
+  }
 });
 

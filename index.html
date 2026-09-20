@@ -504,23 +504,18 @@
     </div>
 
     <div class="footer-container" style="position: relative; z-index: 2;">
-      <!-- Centered Symmetrical Header -->
-      <div class="contact-header-center">
-        <h2 class="footer-title">Available for Work. <br><span class="yellow-highlight">Let's Connect!</span></h2>
-        <p class="contact-subtitle">Have a project in mind, job opportunity, or inquiry? Reach out below!</p>
-      </div>
-
-      <!-- Symmetrical 2-Column Cards Grid -->
       <div class="contact-grid-container">
         
-        <!-- Left Symmetrical Card: Contact Channels -->
-        <div class="contact-card-compact">
-          <h3 class="form-card-heading"><i class="fa-solid fa-address-book"></i> Direct Contact Info</h3>
-          
-          <div class="status-badge-compact" style="margin-bottom: 20px;">
+        <!-- Left Side: Header & Quick Contact Info Card -->
+        <div class="contact-info-col">
+          <div class="status-badge-compact">
             <span class="pulse-dot"></span> AVAILABLE FOR FREELANCE & FULL-TIME
           </div>
-
+          <h2 class="contact-side-title">Let's Build Something <br><span class="yellow-highlight">Great Together!</span></h2>
+          <p class="contact-side-desc">
+            Have a web development project, data analytics inquiry, or job opportunity? Feel free to reach out via the form or contact details directly.
+          </p>
+          
           <div class="contact-info-cards-stack">
             <div class="contact-info-tile">
               <div class="tile-icon"><i class="fa-solid fa-envelope"></i></div>
@@ -553,48 +548,49 @@
           </div>
         </div>
 
-        <!-- Right Symmetrical Card: Contact Form -->
-        <div class="contact-card-compact">
-          <h3 class="form-card-heading"><i class="fa-solid fa-paper-plane"></i> Send a Message</h3>
-          
-          <form class="contact-form" id="contact-form" action="https://formsubmit.co/roydebangshi5@gmail.com" method="POST">
-            <input type="hidden" name="_captcha" value="false">
-            <input type="hidden" name="_template" value="table">
-            <input type="hidden" name="_subject" value="New Portfolio Contact Form Message!">
+        <!-- Right Side: Compact Contact Form -->
+        <div class="contact-form-col">
+          <div class="contact-card-compact">
+            <h3 class="form-card-heading"><i class="fa-solid fa-paper-plane"></i> Send a Message</h3>
             
-            <div class="form-row">
-              <div class="form-group">
-                <label for="contact-name"><i class="fa-solid fa-user"></i> Full Name <span class="required-star">*</span></label>
-                <input type="text" id="contact-name" name="name" class="form-control" placeholder="Alex Morgan" required>
+            <form class="contact-form" id="contact-form" action="https://formsubmit.co/roydebangshi5@gmail.com" method="POST">
+              <input type="hidden" name="_captcha" value="false">
+              <input type="hidden" name="_template" value="table">
+              <input type="hidden" name="_subject" value="New Portfolio Contact Form Message!">
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="contact-name"><i class="fa-solid fa-user"></i> Full Name <span class="required-star">*</span></label>
+                  <input type="text" id="contact-name" name="name" class="form-control" placeholder="Alex Morgan" required>
+                </div>
+                <div class="form-group">
+                  <label for="contact-phone"><i class="fa-solid fa-phone"></i> Phone No. <span class="required-star">*</span></label>
+                  <input type="tel" id="contact-phone" name="phone" class="form-control" placeholder="+91 98765 43210" required>
+                </div>
               </div>
-              <div class="form-group">
-                <label for="contact-phone"><i class="fa-solid fa-phone"></i> Phone No. <span class="required-star">*</span></label>
-                <input type="tel" id="contact-phone" name="phone" class="form-control" placeholder="+91 98765 43210" required>
-              </div>
-            </div>
 
-            <div class="form-row">
-              <div class="form-group">
-                <label for="contact-email"><i class="fa-solid fa-envelope"></i> Email Address <span class="required-star">*</span></label>
-                <input type="email" id="contact-email" name="email" class="form-control" placeholder="alex@example.com" required>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="contact-email"><i class="fa-solid fa-envelope"></i> Email Address <span class="required-star">*</span></label>
+                  <input type="email" id="contact-email" name="email" class="form-control" placeholder="alex@example.com" required>
+                </div>
+                <div class="form-group">
+                  <label for="contact-subject"><i class="fa-solid fa-tag"></i> Subject</label>
+                  <input type="text" id="contact-subject" name="subject" class="form-control" placeholder="Project / Hire">
+                </div>
               </div>
+
               <div class="form-group">
-                <label for="contact-subject"><i class="fa-solid fa-tag"></i> Subject</label>
-                <input type="text" id="contact-subject" name="subject" class="form-control" placeholder="Project / Hire">
+                <label for="contact-message"><i class="fa-solid fa-message"></i> Message <span class="required-star">*</span></label>
+                <textarea id="contact-message" name="message" class="form-control" rows="3" placeholder="Write your message here..." required></textarea>
               </div>
-            </div>
 
-            <div class="form-group">
-              <label for="contact-message"><i class="fa-solid fa-message"></i> Message <span class="required-star">*</span></label>
-              <textarea id="contact-message" name="message" class="form-control" rows="3" placeholder="Write your message here..." required></textarea>
-            </div>
-
-            <div class="form-action">
-              <button type="submit" class="btn btn-yellow submit-btn" id="contact-submit-btn">
-                <i class="fa-solid fa-paper-plane"></i> SEND MESSAGE
-              </button>
-            </div>
-          </form>
+              <div class="form-action">
+                <button type="submit" class="btn btn-yellow submit-btn" id="contact-submit-btn">
+                  <i class="fa-solid fa-paper-plane"></i> SEND MESSAGE
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
 
       </div>

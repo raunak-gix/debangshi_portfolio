@@ -390,5 +390,98 @@ export default function StudentFilter({ students }) {
 
   window.addEventListener('scroll', updateActiveNav);
   updateActiveNav();
+
+  // ------------------------------------------------------------------------
+  // 8. Contact Section Interactive Floating Tech Particles Canvas Animation
+  // ------------------------------------------------------------------------
+  const contactCanvas = document.getElementById('contact-canvas');
+  if (contactCanvas) {
+    const ctx = contactCanvas.getContext('2d');
+    let width = (contactCanvas.width = contactCanvas.parentElement.offsetWidth);
+    let height = (contactCanvas.height = contactCanvas.parentElement.offsetHeight);
+
+    window.addEventListener('resize', () => {
+      if (contactCanvas.parentElement) {
+        width = contactCanvas.width = contactCanvas.parentElement.offsetWidth;
+        height = contactCanvas.height = contactCanvas.parentElement.offsetHeight;
+      }
+    });
+
+    const particles = [];
+    const particleCount = 30;
+    const symbols = ['+', '< />', '{ }', '[ ]', '✦', '01', 'sql', 'py', 'js'];
+
+    class Particle {
+      constructor() {
+        this.x = Math.random() * width;
+        this.y = Math.random() * height;
+        this.vx = (Math.random() - 0.5) * 0.5;
+        this.vy = (Math.random() - 0.5) * 0.5;
+        this.size = Math.random() * 3 + 2;
+        this.symbol = symbols[Math.floor(Math.random() * symbols.length)];
+        this.isSymbol = Math.random() > 0.55;
+        this.alpha = Math.random() * 0.45 + 0.25;
+      }
+
+      update() {
+        this.x += this.vx;
+        this.y += this.vy;
+
+        if (this.x < 0 || this.x > width) this.vx *= -1;
+        if (this.y < 0 || this.y > height) this.vy *= -1;
+      }
+
+      draw() {
+        const isDark = document.body.classList.contains('dark-mode');
+        ctx.fillStyle = isDark ? `rgba(255, 221, 0, ${this.alpha})` : `rgba(139, 92, 246, ${this.alpha})`;
+        
+        if (this.isSymbol) {
+          ctx.font = '11px JetBrains Mono, monospace';
+          ctx.fillText(this.symbol, this.x, this.y);
+        } else {
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      }
+    }
+
+    for (let i = 0; i < particleCount; i++) {
+      particles.push(new Particle());
+    }
+
+    function animateContactBg() {
+      ctx.clearRect(0, 0, width, height);
+      const isDark = document.body.classList.contains('dark-mode');
+
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+
+          if (dist < 120) {
+            ctx.beginPath();
+            ctx.strokeStyle = isDark
+              ? `rgba(255, 221, 0, ${0.12 * (1 - dist / 120)})`
+              : `rgba(139, 92, 246, ${0.1 * (1 - dist / 120)})`;
+            ctx.lineWidth = 1;
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.stroke();
+          }
+        }
+      }
+
+      particles.forEach(p => {
+        p.update();
+        p.draw();
+      });
+
+      requestAnimationFrame(animateContactBg);
+    }
+
+    animateContactBg();
+  }
 });
 

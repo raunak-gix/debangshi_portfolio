@@ -234,13 +234,17 @@ export default function StudentFilter({ students }) {
   }
 
   // ------------------------------------------------------------------------
-  // 5a. Contact Form Submission Handler
+  // 5a. Contact Form Submission Handler (Linked to roydebangshi5@gmail.com)
   // ------------------------------------------------------------------------
   const contactForm = document.getElementById('contact-form');
   if (contactForm) {
     contactForm.addEventListener('submit', (e) => {
       e.preventDefault();
       const nameInput = document.getElementById('contact-name');
+      const phoneInput = document.getElementById('contact-phone');
+      const emailInput = document.getElementById('contact-email');
+      const subjectInput = document.getElementById('contact-subject');
+      const messageInput = document.getElementById('contact-message');
       const submitBtn = document.getElementById('contact-submit-btn');
       const originalBtnText = submitBtn ? submitBtn.innerHTML : '';
 
@@ -249,10 +253,29 @@ export default function StudentFilter({ students }) {
         submitBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> SENDING...`;
       }
 
-      setTimeout(() => {
-        const senderName = nameInput && nameInput.value.trim() ? nameInput.value.trim() : 'there';
+      const formData = {
+        name: nameInput ? nameInput.value.trim() : '',
+        phone: phoneInput ? phoneInput.value.trim() : '',
+        email: emailInput ? emailInput.value.trim() : '',
+        subject: subjectInput && subjectInput.value.trim() ? subjectInput.value.trim() : 'Portfolio Contact Message',
+        message: messageInput ? messageInput.value.trim() : '',
+        _captcha: "false",
+        _template: "table"
+      };
+
+      fetch('https://formsubmit.co/ajax/roydebangshi5@gmail.com', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify(formData)
+      })
+      .then(response => response.json())
+      .then(data => {
+        const senderName = formData.name ? formData.name : 'there';
         if (toast) {
-          toast.innerText = `Thank you, ${senderName}! Your message has been sent successfully.`;
+          toast.innerText = `Thank you, ${senderName}! Your message has been sent directly to roydebangshi5@gmail.com`;
           toast.classList.add('show');
           setTimeout(() => {
             toast.classList.remove('show');
@@ -264,7 +287,11 @@ export default function StudentFilter({ students }) {
           submitBtn.innerHTML = originalBtnText;
         }
         contactForm.reset();
-      }, 1000);
+      })
+      .catch(error => {
+        // Fallback to standard form submission if AJAX request encounters an issue
+        contactForm.submit();
+      });
     });
   }
 

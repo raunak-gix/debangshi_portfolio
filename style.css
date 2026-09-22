@@ -601,12 +601,19 @@ body.dark-mode .avatar-card:hover {
 
 /* Infinite Skill Marquee Banner */
 .marquee-wrapper {
+  position: relative;
+  z-index: 5;
   background: var(--accent-yellow);
   border-top: 2.5px solid #0f172a;
   border-bottom: 2.5px solid #0f172a;
   padding: 16px 0;
   overflow: hidden;
   display: flex;
+}
+
+body.dark-mode .marquee-wrapper {
+  border-top-color: #ffffff;
+  border-bottom-color: #ffffff;
 }
 
 .marquee-track {

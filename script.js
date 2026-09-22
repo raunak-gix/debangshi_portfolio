@@ -79,30 +79,31 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const projectData = {
     '1': {
-      title: 'Exploratory Data Analysis Portal',
-      category: 'Python • Pandas • SQL Analytics',
-      metric: 'Data Insights & Cleaning Engine',
-      summary: 'Engineered a Python exploratory data analysis script using Pandas & NumPy to process multi-feature datasets, clean missing records, and plot trend correlations.',
-      problem: 'Raw student performance and survey data required extensive cleaning and summary stats prior to analysis.',
+      title: 'Weather Hub Application',
+      category: 'HTML5 • CSS3 • JavaScript • Weather API',
+      metric: 'Live - Vercel Deployment',
+      liveUrl: 'https://weather-app-lemon-nine-30.vercel.app/',
+      summary: 'Developed a responsive weather application using HTML, CSS, and JavaScript, with real-time weather data fetched through an external weather API.',
+      problem: 'Users need instant, location-based climate forecasts, sunrise/sunset times, humidity tracking, and 3-day weather predictions with instant city search.',
       approach: [
-        'Cleaned null values and outlier records in Python using Pandas dataframes.',
-        'Wrote SQL aggregations to calculate statistical averages across student cohorts.',
-        'Generated visual summary plots to highlight key academic performance indicators.'
+        'Fetched real-time weather data asynchronously using an external Weather REST API.',
+        'Structured clean, responsive UI layouts with HTML5, CSS3, and glassmorphism styling for all devices.',
+        'Implemented interactive search with autocomplete suggestions, temperature metrics display, and error handling for invalid city inputs.'
       ],
-      codeSnippet: `# Python Pandas Data Cleaning & Summary Script
-import pandas as pd
-import numpy as np
-
-def analyze_student_data(file_path):
-    df = pd.read_csv(file_path)
-    df.dropna(subset=['score', 'attendance'], inplace=True)
-    
-    summary = df.groupby('department').agg(
-        avg_score=('score', 'mean'),
-        avg_attendance=('attendance', 'mean'),
-        total_students=('student_id', 'count')
-    ).reset_index()
-    return summary`
+      codeSnippet: `// Asynchronous Real-Time Weather Data Fetching Function
+async function fetchWeatherData(city) {
+  const apiKey = 'YOUR_WEATHER_API_KEY';
+  const url = \`https://api.openweathermap.org/data/2.5/weather?q=\${city}&units=metric&appid=\${apiKey}\`;
+  
+  try {
+    const response = await fetch(url);
+    if (!response.ok) throw new Error('City not found');
+    const data = await response.json();
+    updateWeatherUI(data);
+  } catch (error) {
+    showError('Please check city spelling and try again.');
+  }
+}`
     },
     '2': {
       title: 'Megatronix Tech Fest Event Portal',
@@ -176,19 +177,20 @@ export default function StudentFilter({ students }) {
       modalBody.innerHTML = `
         <div class="badge-pill yellow-fill" style="margin-bottom: 12px;">${data.category}</div>
         <h2 style="font-size: 2rem; margin-bottom: 12px; color: var(--text-main);">${data.title}</h2>
-        <div style="font-family: var(--font-mono); color: var(--accent-yellow); font-weight: 700; margin-bottom: 24px;">IMPACT: ${data.metric}</div>
+        <div style="font-family: var(--font-mono); color: var(--accent-yellow); font-weight: 700; margin-bottom: 16px;">IMPACT: ${data.metric}</div>
+        ${data.liveUrl ? `<div style="margin-bottom: 24px;"><a href="${data.liveUrl}" target="_blank" class="btn btn-yellow btn-sm"><i class="fa-solid fa-arrow-up-right-from-square"></i> VISIT LIVE APPLICATION</a></div>` : ''}
         
         <p style="color: var(--text-muted); line-height: 1.7; margin-bottom: 24px;">${data.summary}</p>
         
-        <h4 style="font-size: 1.1rem; color: var(--text-main); margin-bottom: 8px;">Business Problem</h4>
+        <h4 style="font-size: 1.1rem; color: var(--text-main); margin-bottom: 8px;">Business Problem / Objective</h4>
         <p style="color: var(--text-muted); line-height: 1.6; margin-bottom: 24px;">${data.problem}</p>
         
-        <h4 style="font-size: 1.1rem; color: var(--text-main); margin-bottom: 8px;">Key Analytical Approach</h4>
+        <h4 style="font-size: 1.1rem; color: var(--text-main); margin-bottom: 8px;">Key Technical Approach</h4>
         <ul style="color: var(--text-muted); padding-left: 20px; line-height: 1.7; margin-bottom: 24px;">
           ${data.approach.map(item => `<li>${item}</li>`).join('')}
         </ul>
 
-        <h4 style="font-size: 1.1rem; color: var(--text-main); margin-bottom: 8px;">Analytical Code Snippet</h4>
+        <h4 style="font-size: 1.1rem; color: var(--text-main); margin-bottom: 8px;">Implementation Code Snippet</h4>
         <pre class="code-block"><code>${escapeHtml(data.codeSnippet)}</code></pre>
       `;
 

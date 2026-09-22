@@ -1429,7 +1429,7 @@ body.dark-mode .glow-orb {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 48px;
-  align-items: start;
+  align-items: stretch;
   margin-bottom: 60px;
 }
 
@@ -1607,13 +1607,19 @@ body.dark-mode .copy-btn-sm:hover {
 /* Right Form Column */
 .contact-form-col {
   text-align: left;
+  display: flex;
+  flex-direction: column;
 }
 
 .contact-card-compact {
   background: #ffffff;
   border: 2.5px solid #0f172a;
   box-shadow: 7px 7px 0px #0f172a;
-  padding: 28px;
+  padding: 24px 28px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -1650,7 +1656,9 @@ body.dark-mode .form-card-heading i {
 .contact-form {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  justify-content: space-between;
+  flex: 1;
+  gap: 14px;
 }
 
 .form-row {

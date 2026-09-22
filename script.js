@@ -805,10 +805,6 @@ function handleGuess(userGuess) {
       if (arcadeOverlay) arcadeOverlay.classList.remove('hidden');
     }
 
-      if (startBtn) startBtn.innerHTML = `<i class="fa-solid fa-rotate-right"></i> PLAY AGAIN`;
-      if (arcadeOverlay) arcadeOverlay.classList.remove('hidden');
-    }
-
     function gameLoop() {
       if (!isPlaying) return;
       frameCount++;

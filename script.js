@@ -106,63 +106,58 @@ async function fetchWeatherData(city) {
 }`
     },
     '2': {
-      title: 'Megatronix Tech Fest Event Portal',
-      category: 'Front-End • HTML5 • CSS3 • JavaScript',
-      metric: '45% Increase in Student Registrations',
-      summary: 'Designed and developed a responsive event website for Megatronix, the official technical club of college, providing technical fest schedules and automated registration forms.',
-      problem: 'College students needed a centralized web hub to view hackathon schedules, workshop details, and submit event registrations.',
+      title: 'Stopwatch Application',
+      category: 'HTML5 • CSS3 • JavaScript',
+      metric: 'Live - Vercel Deployment',
+      summary: 'Developed an interactive stopwatch application with start, pause, reset, and lap-time tracking functionality using JavaScript-based real-time controls.',
+      problem: 'Users needed a precise, responsive digital timer interface with real-time lap recording and instant control response.',
       approach: [
-        'Structured semantic HTML5 pages for event guidelines and workshop rules.',
-        'Styled custom CSS3 layouts with CSS Grid and Flexbox for mobile responsiveness.',
-        'Implemented JavaScript form validation for instant student registration feedback.'
+        'Implemented high-accuracy JavaScript timers for millisecond-level precision tracking.',
+        'Designed intuitive controls for Start, Pause, Reset, and dynamic Lap recording.',
+        'Rendered interactive lap tables showing split times and time differences with responsive layout styling.'
       ],
-      codeSnippet: `// JavaScript Client-side Registration Form Validation
-const form = document.getElementById('reg-form');
-form.addEventListener('submit', (e) => {
-  e.preventDefault();
-  const name = document.getElementById('student-name').value;
-  const email = document.getElementById('student-email').value;
-  
-  if (name && email.includes('@')) {
-    alert(\`Success! Welcome to Megatronix Tech Fest, \${name}!\`);
-  } else {
-    alert('Please enter a valid student email address.');
-  }
-});`
+      codeSnippet: `// Stopwatch Timer Engine with Millisecond Precision
+let startTime = 0;
+let elapsedTime = 0;
+let timerInterval = null;
+let lapTimes = [];
+
+function startStopwatch() {
+  startTime = Date.now() - elapsedTime;
+  timerInterval = setInterval(() => {
+    elapsedTime = Date.now() - startTime;
+    displayFormattedTime(elapsedTime);
+  }, 10);
+}
+
+function recordLap() {
+  lapTimes.push(elapsedTime);
+  renderLapTableUI(lapTimes);
+}`
     },
     '3': {
-      title: 'Student Performance Dashboard App',
-      category: 'React.js Basics • JavaScript • Web App',
-      metric: 'Interactive React Component UI',
-      summary: 'Built a modular React.js dashboard component to display student academic performance records with interactive search and metric filtering.',
-      problem: 'Demonstrating clean React state management for filtering student cards dynamically.',
+      title: 'Guess the Number Game',
+      category: 'HTML5 • CSS3 • JavaScript',
+      metric: 'Live - GitHub Deployment',
+      summary: 'Built an interactive number-guessing game where users receive dynamic hints and feedback while attempting to identify the randomly generated number.',
+      problem: 'Creating an engaging, educational web game with real-time feedback, score tracking, input validation, and dynamic animations.',
       approach: [
-        'Created reusable functional React components for StudentCard and MetricsSummary.',
-        'Used React useState hook to handle live keyword search filtering.',
-        'Styled responsive cards with CSS Modules.'
+        'Generated random secret target numbers within configurable difficulty ranges.',
+        'Calculated distance metrics to provide dynamic hints (higher/lower) after each attempt.',
+        'Added score tracking, high score persistence, input validation, and celebration UI triggers.'
       ],
-      codeSnippet: `// React.js Student Filter Component
-import React, { useState } from 'react';
+      codeSnippet: `// Guess the Number Game Logic & Dynamic Hints
+let targetNumber = Math.floor(Math.random() * 100) + 1;
+let attemptsLeft = 10;
 
-export default function StudentFilter({ students }) {
-  const [searchTerm, setSearchTerm] = useState('');
-  
-  const filtered = students.filter(s => 
-    s.name.toLowerCase().includes(searchTerm.toLowerCase())
-  );
-  
-  return (
-    <div>
-      <input 
-        type="text" 
-        placeholder="Search student..." 
-        onChange={e => setSearchTerm(e.target.value)} 
-      />
-      {filtered.map(student => (
-        <div key={student.id}>{student.name} - Score: {student.score}</div>
-      ))}
-    </div>
-  );
+function handleGuess(userGuess) {
+  if (userGuess === targetNumber) {
+    showVictoryScreen(attemptsLeft);
+  } else {
+    attemptsLeft--;
+    const hint = userGuess < targetNumber ? "Too Low! 📈" : "Too High! 📉";
+    updateHintBanner(hint, attemptsLeft);
+  }
 }`
     }
   };

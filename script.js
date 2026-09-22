@@ -685,7 +685,7 @@ function handleGuess(userGuess) {
     const keys = { left: false, right: false };
 
     const itemTypes = [
-      { text: 'HTML5', pts: 10, color: '#ff6b4a', isBug: false },
+      { text: 'HTML5', pts: 10, color: '#10b981', isBug: false },
       { text: 'JS DOM', pts: 15, color: '#facc15', isBug: false },
       { text: 'PYTHON', pts: 20, color: '#60a5fa', isBug: false },
       { text: 'SQL', pts: 20, color: '#c084fc', isBug: false },

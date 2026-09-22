@@ -139,7 +139,8 @@ function recordLap() {
     '3': {
       title: 'Guess the Number Game',
       category: 'HTML5 • CSS3 • JavaScript',
-      metric: 'Live - GitHub Deployment',
+      metric: 'Live - Vercel Deployment',
+      liveUrl: 'https://guess-no-js.vercel.app/',
       summary: 'Built an interactive number-guessing game where users receive dynamic hints and feedback while attempting to identify the randomly generated number.',
       problem: 'Creating an engaging, educational web game with real-time feedback, score tracking, input validation, and dynamic animations.',
       approach: [

@@ -109,6 +109,7 @@ async function fetchWeatherData(city) {
       title: 'Stopwatch Application',
       category: 'HTML5 • CSS3 • JavaScript',
       metric: 'Live - Vercel Deployment',
+      liveUrl: 'https://stopwatch-henna-seven.vercel.app/',
       summary: 'Developed an interactive stopwatch application with start, pause, reset, and lap-time tracking functionality using JavaScript-based real-time controls.',
       problem: 'Users needed a precise, responsive digital timer interface with real-time lap recording and instant control response.',
       approach: [

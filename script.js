@@ -432,7 +432,9 @@ function handleGuess(userGuess) {
 
       draw() {
         const isDark = document.body.classList.contains('dark-mode');
-        ctx.fillStyle = isDark ? `rgba(255, 221, 0, ${this.alpha})` : `rgba(139, 92, 246, ${this.alpha})`;
+        ctx.fillStyle = isDark
+          ? `rgba(255, 221, 0, ${this.alpha})`
+          : `rgba(107, 33, 168, ${Math.min(1, this.alpha * 1.6)})`;
         
         if (this.isSymbol) {
           ctx.font = '11px JetBrains Mono, monospace';
@@ -463,7 +465,7 @@ function handleGuess(userGuess) {
             ctx.beginPath();
             ctx.strokeStyle = isDark
               ? `rgba(255, 221, 0, ${0.12 * (1 - dist / 120)})`
-              : `rgba(139, 92, 246, ${0.1 * (1 - dist / 120)})`;
+              : `rgba(107, 33, 168, ${0.25 * (1 - dist / 120)})`;
             ctx.lineWidth = 1;
             ctx.moveTo(particles[i].x, particles[i].y);
             ctx.lineTo(particles[j].x, particles[j].y);
@@ -556,7 +558,7 @@ function handleGuess(userGuess) {
         const isDark = document.body.classList.contains('dark-mode');
         ctx.fillStyle = isDark
           ? `rgba(255, 221, 0, ${this.alpha})`
-          : `rgba(139, 92, 246, ${this.alpha})`;
+          : `rgba(107, 33, 168, ${Math.min(1, this.alpha * 1.7)})`;
 
         if (this.isSymbol) {
           ctx.font = '11px JetBrains Mono, monospace';
@@ -587,7 +589,7 @@ function handleGuess(userGuess) {
             ctx.beginPath();
             ctx.strokeStyle = isDark
               ? `rgba(255, 221, 0, ${0.1 * (1 - dist / 130)})`
-              : `rgba(139, 92, 246, ${0.08 * (1 - dist / 130)})`;
+              : `rgba(107, 33, 168, ${0.22 * (1 - dist / 130)})`;
             ctx.lineWidth = 1;
             ctx.moveTo(particles[i].x, particles[i].y);
             ctx.lineTo(particles[j].x, particles[j].y);

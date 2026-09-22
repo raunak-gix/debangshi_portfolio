@@ -209,7 +209,7 @@
               <span class="version-tag">v2.0 PRO</span>
             </div>
             <div class="arcade-stats">
-              <div class="stat-pill stat-high"><i class="fa-solid fa-trophy"></i> HIGH: <span id="game-highscore">0</span></div>
+              <div class="stat-pill stat-high"><i class="fa-solid fa-trophy"></i> HIGH: <span id="game-highplayer">DEBANGSHI</span> (<span id="game-highscore">0</span>)</div>
               <div class="stat-pill stat-score"><i class="fa-solid fa-bolt"></i> SCORE: <span id="game-score">0</span></div>
               <div class="stat-pill stat-lives"><i class="fa-solid fa-heart"></i> LIVES: <span id="game-lives">❤️❤️❤️</span></div>
             </div>
@@ -227,6 +227,22 @@
                 <div class="arcade-badge">ARCADE EDITION</div>
                 <h3 class="overlay-title" id="overlay-title">CATCH THE TECH SKILLS!</h3>
                 <p class="overlay-desc" id="overlay-desc">Move the catcher using your <strong>Mouse</strong>, <strong>Arrow Keys [← →]</strong>, or <strong>On-Screen Buttons</strong>!</p>
+
+                <!-- Player Name Input -->
+                <div class="player-input-box">
+                  <label for="player-name-input" class="player-input-label">
+                    <i class="fa-solid fa-user-ninja"></i> ENTER PLAYER NAME:
+                  </label>
+                  <input 
+                    type="text" 
+                    id="player-name-input" 
+                    class="arcade-name-input" 
+                    placeholder="ENTER YOUR NAME..." 
+                    maxlength="14"
+                    autocomplete="off"
+                    spellcheck="false"
+                  />
+                </div>
                 
                 <div class="instruction-row">
                   <div class="inst-pill"><i class="fa-brands fa-html5" style="color:#ff6b4a;"></i> HTML +10</div>

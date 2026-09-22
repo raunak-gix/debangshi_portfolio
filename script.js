@@ -622,6 +622,8 @@ function handleGuess(userGuess) {
 
     const scoreEl = document.getElementById('game-score');
     const highScoreEl = document.getElementById('game-highscore');
+    const highPlayerEl = document.getElementById('game-highplayer');
+    const playerNameInput = document.getElementById('player-name-input');
     const livesEl = document.getElementById('game-lives');
 
     const ctrlLeft = document.getElementById('ctrl-left');
@@ -632,12 +634,43 @@ function handleGuess(userGuess) {
 
     let score = 0;
     let highScore = parseInt(localStorage.getItem('debangshi_arcade_highscore') || '0', 10);
+    let highPlayer = localStorage.getItem('debangshi_arcade_highplayer') || 'DEBANGSHI';
+    let currentPlayerName = localStorage.getItem('debangshi_arcade_player_name') || '';
     let lives = 3;
     let isPlaying = false;
     let gameLoopId = null;
     let frameCount = 0;
 
-    if (highScoreEl) highScoreEl.innerText = highScore;
+    if (playerNameInput && currentPlayerName) {
+      playerNameInput.value = currentPlayerName;
+    }
+
+    function updateHighScoreUI() {
+      if (highScoreEl) highScoreEl.innerText = highScore;
+      if (highPlayerEl) highPlayerEl.innerText = highPlayer.toUpperCase();
+    }
+
+    updateHighScoreUI();
+
+    // Fetch Global Leaderboard High Score from Cloud Storage API
+    function fetchGlobalHighScore() {
+      fetch('https://api.restful-api.dev/objects/ff808181a09d98f701a0cb1b85217386')
+        .then(res => res.json())
+        .then(data => {
+          if (data && data.data && typeof data.data.score === 'number') {
+            if (data.data.score > highScore || (data.data.score === highScore && data.data.player)) {
+              highScore = data.data.score;
+              highPlayer = data.data.player || 'DEBANGSHI';
+              localStorage.setItem('debangshi_arcade_highscore', highScore.toString());
+              localStorage.setItem('debangshi_arcade_highplayer', highPlayer);
+              updateHighScoreUI();
+            }
+          }
+        })
+        .catch(err => console.log('Using local high score fallback:', err));
+    }
+
+    fetchGlobalHighScore();
 
     const paddle = {
       x: cWidth / 2 - 60,
@@ -719,6 +752,11 @@ function handleGuess(userGuess) {
     }
 
     function startGame() {
+      const inputVal = playerNameInput ? playerNameInput.value.trim() : '';
+      currentPlayerName = inputVal ? inputVal.toUpperCase().slice(0, 14) : 'PLAYER 1';
+      localStorage.setItem('debangshi_arcade_player_name', currentPlayerName);
+      if (playerNameInput) playerNameInput.value = currentPlayerName;
+
       score = 0;
       lives = 3;
       fallingItems.length = 0;
@@ -741,14 +779,31 @@ function handleGuess(userGuess) {
 
       if (score > highScore) {
         highScore = score;
+        highPlayer = currentPlayerName;
         localStorage.setItem('debangshi_arcade_highscore', highScore.toString());
-        if (highScoreEl) highScoreEl.innerText = highScore;
+        localStorage.setItem('debangshi_arcade_highplayer', highPlayer);
+        updateHighScoreUI();
+
         if (overlayTitle) overlayTitle.innerText = '🏆 NEW HIGH SCORE!';
-        if (overlayDesc) overlayDesc.innerHTML = `Awesome job! You scored <strong>${score} points</strong> and set a new personal record!`;
+        if (overlayDesc) overlayDesc.innerHTML = `🔥 LEGENDARY! <strong>${highPlayer}</strong> set a new global record with <strong>${score} points</strong>!`;
+
+        // Sync new high score to global cloud database
+        fetch('https://api.restful-api.dev/objects/ff808181a09d98f701a0cb1b85217386', {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name: 'Debangshi Portfolio Arcade Highscore',
+            data: { player: highPlayer, score: highScore }
+          })
+        }).catch(err => console.warn('Cloud high score sync failed:', err));
       } else {
         if (overlayTitle) overlayTitle.innerText = 'GAME OVER!';
-        if (overlayDesc) overlayDesc.innerHTML = `You caught <strong>${score} points</strong> worth of code & data! Try again to beat the high score!`;
+        if (overlayDesc) overlayDesc.innerHTML = `Nice effort <strong>${currentPlayerName}</strong>! You scored <strong>${score} points</strong>.<br>Current Top Record: <strong>${highPlayer}</strong> (${highScore} pts)`;
       }
+
+      if (startBtn) startBtn.innerHTML = `<i class="fa-solid fa-rotate-right"></i> PLAY AGAIN`;
+      if (arcadeOverlay) arcadeOverlay.classList.remove('hidden');
+    }
 
       if (startBtn) startBtn.innerHTML = `<i class="fa-solid fa-rotate-right"></i> PLAY AGAIN`;
       if (arcadeOverlay) arcadeOverlay.classList.remove('hidden');
@@ -882,7 +937,7 @@ function handleGuess(userGuess) {
       actx.font = '800 11px JetBrains Mono, monospace';
       actx.textAlign = 'center';
       actx.textBaseline = 'middle';
-      actx.fillText('[ 💻 DEBANGSHI ]', paddle.x + paddle.width / 2, paddle.y + paddle.height / 2);
+      actx.fillText('[ 💻 ' + (currentPlayerName || 'DEBANGSHI') + ' ]', paddle.x + paddle.width / 2, paddle.y + paddle.height / 2);
 
       gameLoopId = requestAnimationFrame(gameLoop);
     }

@@ -2471,6 +2471,58 @@ body.dark-mode .tv-monitor-cabinet {
   line-height: 1.5;
 }
 
+.player-input-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  margin: 8px 0;
+  width: 100%;
+  max-width: 320px;
+}
+
+.player-input-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 800;
+  color: #ffdd00;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.arcade-name-input {
+  width: 100%;
+  padding: 10px 16px;
+  background: #141624;
+  border: 2px solid #ffdd00;
+  border-radius: 6px;
+  color: #ffffff;
+  font-family: var(--font-mono);
+  font-size: 15px;
+  font-weight: 800;
+  text-align: center;
+  letter-spacing: 1.5px;
+  outline: none;
+  box-shadow: 0 0 10px rgba(255, 221, 0, 0.15);
+  transition: all 0.2s ease;
+}
+
+.arcade-name-input:focus {
+  border-color: #38bdf8;
+  box-shadow: 0 0 15px rgba(56, 189, 248, 0.35);
+  background: #1a1c30;
+}
+
+.arcade-name-input::placeholder {
+  color: #64748b;
+  font-size: 13px;
+  letter-spacing: 1px;
+  font-weight: 600;
+}
+
 .instruction-row {
   display: flex;
   flex-wrap: wrap;
